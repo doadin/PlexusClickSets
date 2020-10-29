@@ -12,7 +12,7 @@
 ## SavedVariablesPerCharacter: PlexusClickSetsForTalents
 ## X-License: GNU General Public License (GPL) Version 2
 ## X-Website: https://wow.curseforge.com/projects/plexusclicksets/
-## X-Curse-Project-ID:
+## X-Curse-Project-ID: 416218
 
 locale-enUS.lua
 locale-zhCN.lua
