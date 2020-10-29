@@ -1,4 +1,5 @@
 local L = LibStub("AceLocale-3.0"):GetLocale("PlexusClickSets")
+local PLEXUS_CLICK_SETS_BUTTONS = 5
 local i
 local queue = false
 local function makeMovable(frame)
@@ -23,7 +24,7 @@ function PlexusClickSetsFrame_OnLoad(self)
     self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
     self:RegisterEvent("PLAYER_ALIVE");
     makeMovable(self)
-    PanelTemplates_SetNumTabs(self, GRID_CLICK_SETS_BUTTONS + 2);
+    PanelTemplates_SetNumTabs(self, PLEXUS_CLICK_SETS_BUTTONS + 2);
     self.selectedTab = 1;
     PanelTemplates_UpdateTabs(self);
 
@@ -282,7 +283,7 @@ function PlexusClickSetsFrame_GetCurrentSet()
         PlexusClickSetsForTalents[spec] = PlexusClickSets_GetDefault(spec);
     end
     local set = PlexusClickSetsForTalents[spec]
-    for i=1, GRID_CLICK_SETS_BUTTONS+2 do set[tostring(i)] = set[tostring(i)] or {} end
+    for i=1, PLEXUS_CLICK_SETS_BUTTONS+2 do set[tostring(i)] = set[tostring(i)] or {} end
     return set
 end
 
