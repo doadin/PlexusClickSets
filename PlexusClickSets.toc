@@ -3,7 +3,7 @@
 
 ## Author: Warbaby
 ## OptionalDeps: Plexus
-## SavedVariablesPerCharacter: GridClickSetsForTalents
+## SavedVariablesPerCharacter: PlexusClickSetsForTalents
 
 locale-enUS.lua
 locale-zhCN.lua
@@ -12,5 +12,5 @@ locale-koKR.lua
 
 DefaultClickSets.lua
 UIDropDownTooltipFunc.lua
-GridClickSetsFrame.xml
+PlexusClickSetsFrame.xml
 SetupPlexus.lua

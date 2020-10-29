@@ -16,7 +16,7 @@ local function makeMovable(frame)
     frame:SetMovable(true)
 end
 
-function GridClickSetsFrame_OnLoad(self)
+function PlexusClickSetsFrame_OnLoad(self)
     self:RegisterEvent("PLAYER_REGEN_ENABLED");
     self:RegisterEvent("VARIABLES_LOADED");
     self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
@@ -27,25 +27,25 @@ function GridClickSetsFrame_OnLoad(self)
     PanelTemplates_UpdateTabs(self);
 
     for i = 1, 8 do
-        getglobal("GridClickSetButton"..i.."Title"):SetText(GridClickSets_Titles[i])
+        getglobal("PlexusClickSetButton"..i.."Title"):SetText(PlexusClickSets_Titles[i])
     end
 
-    --GridClickSetsFrame_TabOnClick();
+    --PlexusClickSetsFrame_TabOnClick();
     table.insert(UISpecialFrames, self:GetName())
 end
 
-function GridClickSetsFrame_OnEvent(self, event, arg1)
+function PlexusClickSetsFrame_OnEvent(self, event, arg1)
     if(event=="PLAYER_REGEN_ENABLED") then
         if(queue) then
-            GridClickSetsFrame_UpdateAll()
+            PlexusClickSetsFrame_UpdateAll()
             queue = false
         end
     elseif(event=="VARIABLES_LOADED") then
         if not U1 then
             if(GetLocale()=="zhCN") then
-                DEFAULT_CHAT_FRAME:AddMessage("GridClickSets - |cffff3333爱不易|r (github.com/aby-ui)")
+                DEFAULT_CHAT_FRAME:AddMessage("PlexusClickSets - |cffff3333爱不易|r (github.com/aby-ui)")
             elseif(GetLocale()=="zhTW") then
-                DEFAULT_CHAT_FRAME:AddMessage("GridClickSets - |cff3399FF三月十二|r@聖光之願|cffFF00FF<冰封十字軍>|r.")
+                DEFAULT_CHAT_FRAME:AddMessage("PlexusClickSets - |cff3399FF三月十二|r@聖光之願|cffFF00FF<冰封十字軍>|r.")
             end
         else
             if _G.ClassMods and _G.ClassMods.Options.DB.clicktocast.enabled then
@@ -55,13 +55,13 @@ function GridClickSetsFrame_OnEvent(self, event, arg1)
     end
 
     if(event=="VARIABLES_LOADED" or (event=="PLAYER_SPECIALIZATION_CHANGED" and arg1=="player") or event=="PLAYER_ALIVE") then
-        GridClickSetsFrame_UpdateAll(1);
+        PlexusClickSetsFrame_UpdateAll(1);
     end
 end
 
-function GridClickSetsFrame_TypeUpdate(id)
-    local argF = getglobal("GridClickSetButton"..id.."Arg")
-    local typeDD = getglobal("GridClickSetButton"..id.."Type")
+function PlexusClickSetsFrame_TypeUpdate(id)
+    local argF = getglobal("PlexusClickSetButton"..id.."Arg")
+    local typeDD = getglobal("PlexusClickSetButton"..id.."Type")
     local value = UIDropDownMenu_GetSelectedValue(typeDD)
     if (not value) then value = "NONE" end
 
@@ -71,69 +71,69 @@ function GridClickSetsFrame_TypeUpdate(id)
         argF:Hide();
     end
 
-    local below = getglobal("GridClickSetButton"..(id+1))
+    local below = getglobal("PlexusClickSetButton"..(id+1))
     if(below) then
         below:ClearAllPoints();
         if argF:IsVisible() then
             below:SetPoint("TOPLEFT", argF, "BOTTOMLEFT", -50, 0);
         else
-            below:SetPoint("TOPLEFT", getglobal("GridClickSetButton"..id), "BOTTOMLEFT", 0, -5);
+            below:SetPoint("TOPLEFT", getglobal("PlexusClickSetButton"..id), "BOTTOMLEFT", 0, -5);
         end
     end
 end
 
-function GridClickSetsFrame_Resize()
+function PlexusClickSetsFrame_Resize()
     local k=0;
     local id
     for id=1, 8 do
-        local argF = getglobal("GridClickSetButton"..id.."Arg")
+        local argF = getglobal("PlexusClickSetButton"..id.."Arg")
         if(argF:IsVisible()) then
             k = k + argF:GetHeight() + 1;
         end
     end
     local height = 340 + k;
     if(height > 450) then
-        GridClickSetsFrame:SetHeight(height);
+        PlexusClickSetsFrame:SetHeight(height);
     else
-        GridClickSetsFrame:SetHeight(450);
+        PlexusClickSetsFrame:SetHeight(450);
     end
 end
 
-function GridClickSetsFrame_TypeUpdateAll()
+function PlexusClickSetsFrame_TypeUpdateAll()
     for i=1,8 do
-        GridClickSetsFrame_TypeUpdate(i)
+        PlexusClickSetsFrame_TypeUpdate(i)
     end
-    GridClickSetsFrame_Resize();
+    PlexusClickSetsFrame_Resize();
 end
 
-function GridClickSets_Type_OnClick(self)
+function PlexusClickSets_Type_OnClick(self)
     UIDropDownMenu_SetSelectedValue(self.owner, self.value);
     local id=self.owner:GetParent():GetID()
-    GridClickSetsFrame_TypeUpdate(id)
-    GridClickSetsFrame_Resize()
+    PlexusClickSetsFrame_TypeUpdate(id)
+    PlexusClickSetsFrame_Resize()
 end
 
 local function ddname(str)
     return " = "..str.." = ";
 end
 
-function GridClickSetButton_TypeDropDown_Initialize(self)
+function PlexusClickSetButton_TypeDropDown_Initialize(self)
     local info;
 
     local _, c = UnitClass("player")
     local spec = GetSpecialization()
-    local list = GridClickSets_SpellList[c];
+    local list = PlexusClickSets_SpellList[c];
     if(list) then
         for spellId, defSpec in pairs(list) do
             --ReplacingTalentSpell IsKnown = false, Replaced IsKnown = true
-            if GridClickSets_MayHaveSpell(defSpec, spec) then
+            if PlexusClickSets_MayHaveSpell(defSpec, spec) then
                 local name, _, icon = GetSpellInfo(spellId)
                 if name ~= nil then
                     info = {};
                     info.text = name
                     info.icon = icon;
                     info.owner = self;
-                    info.func = GridClickSets_Type_OnClick;
+                    info.func = PlexusClickSets_Type_OnClick;
                     info.value = "spellId:"..spellId
                     info.tooltipFunc = function(self, tip, arg1) tip:SetSpellByID(arg1) end
                     info.tooltipFuncArg1 = spellId
@@ -146,153 +146,153 @@ function GridClickSetButton_TypeDropDown_Initialize(self)
     info = {};
     info.text = ddname(TARGET);
     info.owner = self;
-    info.func = GridClickSets_Type_OnClick;
+    info.func = PlexusClickSets_Type_OnClick;
     info.value = "target"
     UIDropDownMenu_AddButton(info);
 
     info = {};
     info.text = ddname(BINDING_NAME_ASSISTTARGET);
     info.owner = self;
-    info.func = GridClickSets_Type_OnClick;
+    info.func = PlexusClickSets_Type_OnClick;
     info.value = "assist"
     UIDropDownMenu_AddButton(info);
 
     info = {};
     info.text = ddname(SKILL..NAME);
     info.owner = self;
-    info.func = GridClickSets_Type_OnClick;
+    info.func = PlexusClickSets_Type_OnClick;
     info.value = "spell"
     UIDropDownMenu_AddButton(info);
 
     --	info = {};
     --	info.text = ddname(SOCIAL_LABEL);
     --	info.owner = self;
-    --	info.func = GridClickSets_Type_OnClick;
+    --	info.func = PlexusClickSets_Type_OnClick;
     --	info.value = "menu"
     --	UIDropDownMenu_AddButton(info);
 
     info = {};
     info.text = ddname(MACRO);
     info.owner = self;
-    info.func = GridClickSets_Type_OnClick;
+    info.func = PlexusClickSets_Type_OnClick;
     info.value = "macro"
     UIDropDownMenu_AddButton(info);
 
     info = {};
     info.text = NONE; --ddname(NONE);
     info.owner = self;
-    info.func = GridClickSets_Type_OnClick;
+    info.func = PlexusClickSets_Type_OnClick;
     info.value = "NONE"
     UIDropDownMenu_AddButton(info);
 end
 
-function GridClickSetsFrame_GetTabSet(btn)
-    local set = GridClickSetsFrame_GetCurrentSet()
+function PlexusClickSetsFrame_GetTabSet(btn)
+    local set = PlexusClickSetsFrame_GetCurrentSet()
     return set[tostring(btn)]
 end
 
-function GridClickSetsFrame_LoadSet(set)
+function PlexusClickSetsFrame_LoadSet(set)
     for i = 1, 8 do
-        local dd = getglobal("GridClickSetButton"..i.."Type")
-        local atts = set and set[GridClickSets_Modifiers[i]] or {}
-        UIDropDownMenu_Initialize(dd, GridClickSetButton_TypeDropDown_Initialize);
+        local dd = getglobal("PlexusClickSetButton"..i.."Type")
+        local atts = set and set[PlexusClickSets_Modifiers[i]] or {}
+        UIDropDownMenu_Initialize(dd, PlexusClickSetButton_TypeDropDown_Initialize);
         UIDropDownMenu_SetSelectedValue(dd, atts.type or "NONE")
         if(atts.arg) then
-            getglobal("GridClickSetButton"..i.."Arg"):SetText(atts.arg)
+            getglobal("PlexusClickSetButton"..i.."Arg"):SetText(atts.arg)
         else
-            getglobal("GridClickSetButton"..i.."Arg"):SetText("")
+            getglobal("PlexusClickSetButton"..i.."Arg"):SetText("")
         end
     end
 
-    GridClickSetsFrame_TypeUpdateAll();
+    PlexusClickSetsFrame_TypeUpdateAll();
 end
 
-function GridClickSetsFrame_TabOnClick()
-    GridClickSetsFrame_LoadSet( GridClickSetsFrame_GetTabSet(GridClickSetsFrame.selectedTab) );
-    if ( false and GridClickSetsFrame.selectedTab == 1 ) then
-        UIDropDownMenu_SetSelectedValue(GridClickSetButton1Type, "target");
-        UIDropDownMenu_DisableDropDown(GridClickSetButton1Type)
+function PlexusClickSetsFrame_TabOnClick()
+    PlexusClickSetsFrame_LoadSet( PlexusClickSetsFrame_GetTabSet(PlexusClickSetsFrame.selectedTab) );
+    if ( false and PlexusClickSetsFrame.selectedTab == 1 ) then
+        UIDropDownMenu_SetSelectedValue(PlexusClickSetButton1Type, "target");
+        UIDropDownMenu_DisableDropDown(PlexusClickSetButton1Type)
     else
-        UIDropDownMenu_EnableDropDown(GridClickSetButton1Type)
+        UIDropDownMenu_EnableDropDown(PlexusClickSetButton1Type)
     end
 end
 
-function GridClickSetsFrame_DefaultsOnClick(fromDialog)
+function PlexusClickSetsFrame_DefaultsOnClick(fromDialog)
     if fromDialog == "YES" then
         local talent = GetSpecialization() or 1
-        GridClickSetsForTalents[talent] = nil
-        GridClickSetsFrame_LoadSet( GridClickSetsFrame_GetTabSet(GridClickSetsFrame.selectedTab) )
-        GridClickSetsFrame_ApplyOnClick()
+        PlexusClickSetsForTalents[talent] = nil
+        PlexusClickSetsFrame_LoadSet( PlexusClickSetsFrame_GetTabSet(PlexusClickSetsFrame.selectedTab) )
+        PlexusClickSetsFrame_ApplyOnClick()
     else
-        StaticPopup_Show("GridClickSets_Reset")
+        StaticPopup_Show("PlexusClickSets_Reset")
     end
 end
 
-function GridClickSetsFrame_SaveOnClick()
-    local set = GridClickSetsFrame_GetCurrentSet()
+function PlexusClickSetsFrame_SaveOnClick()
+    local set = PlexusClickSetsFrame_GetCurrentSet()
     for i=1,8 do
-        set[tostring(GridClickSetsFrame.selectedTab)][GridClickSets_Modifiers[i]] = {
-            type = UIDropDownMenu_GetSelectedValue( getglobal("GridClickSetButton"..i.."Type") ),
-            arg = getglobal("GridClickSetButton"..i.."Arg"):GetText()
+        set[tostring(PlexusClickSetsFrame.selectedTab)][PlexusClickSets_Modifiers[i]] = {
+            type = UIDropDownMenu_GetSelectedValue( getglobal("PlexusClickSetButton"..i.."Type") ),
+            arg = getglobal("PlexusClickSetButton"..i.."Arg"):GetText()
         }
 
-        if set[tostring(GridClickSetsFrame.selectedTab)][GridClickSets_Modifiers[i]].arg == "" then
-            set[tostring(GridClickSetsFrame.selectedTab)][GridClickSets_Modifiers[i]].arg = nil
+        if set[tostring(PlexusClickSetsFrame.selectedTab)][PlexusClickSets_Modifiers[i]].arg == "" then
+            set[tostring(PlexusClickSetsFrame.selectedTab)][PlexusClickSets_Modifiers[i]].arg = nil
         end
 
-        if set[tostring(GridClickSetsFrame.selectedTab)][GridClickSets_Modifiers[i]].type == "NONE" then
-            set[tostring(GridClickSetsFrame.selectedTab)][GridClickSets_Modifiers[i]] = nil
+        if set[tostring(PlexusClickSetsFrame.selectedTab)][PlexusClickSets_Modifiers[i]].type == "NONE" then
+            set[tostring(PlexusClickSetsFrame.selectedTab)][PlexusClickSets_Modifiers[i]] = nil
         end
     end
 end
 
-function GridClickSetsFrame_CancelOnClick()
-    GridClickSetsFrame_LoadSet( GridClickSetsFrame_GetTabSet(GridClickSetsFrame.selectedTab) );
+function PlexusClickSetsFrame_CancelOnClick()
+    PlexusClickSetsFrame_LoadSet( PlexusClickSetsFrame_GetTabSet(PlexusClickSetsFrame.selectedTab) );
 end
 
-function GridClickSetsFrame_CloseOnClick(self)
-    GridClickSetsFrame:Hide();
-    local last = GridClickSetsFrame.lastFrame
-    GridClickSetsFrame.lastFrame = nil
+function PlexusClickSetsFrame_CloseOnClick(self)
+    PlexusClickSetsFrame:Hide();
+    local last = PlexusClickSetsFrame.lastFrame
+    PlexusClickSetsFrame.lastFrame = nil
     if last then
         if type(last) == "function" then
-            last(GridClickSetsFrame)
+            last(PlexusClickSetsFrame)
         else
             last:Show()
         end
     end
 end
 
-function GridClickSetsFrame_ApplyOnClick()
-    GridClickSetsFrame_SaveOnClick()
-    GridClickSetsFrame_UpdateAll()
-    --GridClickSetsFrame:Hide()
+function PlexusClickSetsFrame_ApplyOnClick()
+    PlexusClickSetsFrame_SaveOnClick()
+    PlexusClickSetsFrame_UpdateAll()
+    --PlexusClickSetsFrame:Hide()
 end
 
-GridClickSetsForTalents={}
-GridClickSetsFrame_Updates = {} --for other module insert
+PlexusClickSetsForTalents={}
+PlexusClickSetsFrame_Updates = {} --for other module insert
 
-function GridClickSetsFrame_GetCurrentSet()
+function PlexusClickSetsFrame_GetCurrentSet()
     local spec = GetSpecialization() or 0;
-    if GridClickSetsFrame:IsVisible() then
-        GridClickSetsFrameTalentText:SetFormattedText("%s: %s", SPECIALIZATION, select(2, GetSpecializationInfo(spec)) or UNKNOWN)
+    if PlexusClickSetsFrame:IsVisible() then
+        PlexusClickSetsFrameTalentText:SetFormattedText("%s: %s", SPECIALIZATION, select(2, GetSpecializationInfo(spec)) or UNKNOWN)
     end
-    if GridClickSetsForTalents[spec]==nil then
-        GridClickSetsForTalents[spec] = GridClickSets_GetDefault(spec);
+    if PlexusClickSetsForTalents[spec]==nil then
+        PlexusClickSetsForTalents[spec] = PlexusClickSets_GetDefault(spec);
     end
-    local set = GridClickSetsForTalents[spec]
+    local set = PlexusClickSetsForTalents[spec]
     for i=1, GRID_CLICK_SETS_BUTTONS+2 do set[tostring(i)] = set[tostring(i)] or {} end
     return set
 end
 
-function GridClickSetsFrame_UpdateAll(silent)
-    local set = GridClickSetsFrame_GetCurrentSet()
-    if GridClickSetsFrame:IsVisible() then GridClickSetsFrame_TabOnClick() end
+function PlexusClickSetsFrame_UpdateAll(silent)
+    local set = PlexusClickSetsFrame_GetCurrentSet()
+    if PlexusClickSetsFrame:IsVisible() then PlexusClickSetsFrame_TabOnClick() end
     if(InCombatLockdown()) then
         queue = true
         if not silent then DEFAULT_CHAT_FRAME:AddMessage(GRIDCLICKSETS_LOCKWARNING, 1, 0, 0) end
     else
-        for _, v in pairs(GridClickSetsFrame_Updates) do
+        for _, v in pairs(PlexusClickSetsFrame_Updates) do
             v(set)
         end
         if not silent then DEFAULT_CHAT_FRAME:AddMessage(GRIDCLICKSETS_SET, 1, 1, 0) end
@@ -301,15 +301,15 @@ end
 
 SLASH_CLICKSET1 = "/clicksets";
 SLASH_CLICKSET2 = "/gcs";
-SLASH_CLICKSET3 = "/gridclicksets";
+SLASH_CLICKSET3 = "/plexusclicksets";
 SlashCmdList["CLICKSET"] = function(msg)
-    if GridClickSetsFrame:IsVisible() then GridClickSetsFrame:Hide() else GridClickSetsFrame:Show() end
+    if PlexusClickSetsFrame:IsVisible() then PlexusClickSetsFrame:Hide() else PlexusClickSetsFrame:Show() end
 end
 
-StaticPopupDialogs['GridClickSets_Reset'] = {preferredIndex = 3,
+StaticPopupDialogs['PlexusClickSets_Reset'] = {preferredIndex = 3,
 	text = GRIDCLICKSETS_SET_RESET_WARNING,
 	button1 = YES,
 	button2 = NO,
-	OnAccept = function(self) GridClickSetsFrame_DefaultsOnClick("YES") end,
+	OnAccept = function(self) PlexusClickSetsFrame_DefaultsOnClick("YES") end,
 	hideOnEscape = 1,
 }

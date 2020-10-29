@@ -1,8 +1,8 @@
---/run for _, v in pairs(GridClickSets_DefaultSets) do for _, v2 in pairs(v) do for _, v3 in next, v2 do if not GetSpellInfo(v3) then print(v3, GetSpellInfo(v3)) end end end end
+--/run for _, v in pairs(PlexusClickSets_DefaultSets) do for _, v2 in pairs(v) do for _, v3 in next, v2 do if not GetSpellInfo(v3) then print(v3, GetSpellInfo(v3)) end end end end
 GRID_CLICK_SETS_BUTTONS = 5 --max buttons, another 2 more for wheel up & wheel down
 local assist = { type = "assist" }
 
-GridClickSets_DefaultSets = {
+PlexusClickSets_DefaultSets = {
     PRIEST = {
         [1] = {
             ["1-shift"]	    = 186263,--暗影愈合
@@ -221,7 +221,7 @@ GridClickSets_DefaultSets = {
     }
 }
 
-GridClickSets_SpellList = {
+PlexusClickSets_SpellList = {
     PRIEST = {
         [17] = -2,	--真言术：盾  3暗影2神圣1戒律
         [200829] = 1,	--恳求 buff 194384
@@ -347,7 +347,7 @@ GridClickSets_SpellList = {
 }
 
 if GetLocale() == "zhCN" then
-    GridClickSets_Titles = {
+    PlexusClickSets_Titles = {
         "直接点击 :",
         "Ctrl 点击 :",
         "Alt  点击 :",
@@ -358,7 +358,7 @@ if GetLocale() == "zhCN" then
         "C + S + A :",
     }
 else
-    GridClickSets_Titles = {
+    PlexusClickSets_Titles = {
         "Direct  Click :",
         "Ctrl +  Click :",
         "Alt  +  Click :",
@@ -370,7 +370,7 @@ else
     }
 end
 
-GridClickSets_Modifiers = {
+PlexusClickSets_Modifiers = {
     "",
     "ctrl-",
     "alt-",
@@ -382,16 +382,16 @@ GridClickSets_Modifiers = {
 }
 
 --for check deleted spells
-function GridClickSets_Check()
-    for clz, set in pairs(GridClickSets_SpellList) do
+function PlexusClickSets_Check()
+    for clz, set in pairs(PlexusClickSets_SpellList) do
         for spellId, talent in pairs(set) do
             if not GetSpellInfo(spellId) then ChatFrame1:AddMessage(clz .. " " .. spellId); end
         end
     end
 end
 
---defSpec is value in GridClickSets_SpellList, defSpec < 0 stands for not that spec
-function GridClickSets_MayHaveSpell(defSpec, currSpec)
+--defSpec is value in PlexusClickSets_SpellList, defSpec < 0 stands for not that spec
+function PlexusClickSets_MayHaveSpell(defSpec, currSpec)
     if defSpec == nil or defSpec == 0 or (defSpec > 0 and currSpec == defSpec) or (defSpec < 0 and currSpec ~= -1 * defSpec) then
         return true
     else
@@ -400,9 +400,9 @@ function GridClickSets_MayHaveSpell(defSpec, currSpec)
 end
 
 --Get default for one mouse button, useful when Reset on GUI, but no longer used after 2016.9
-function GridClickSets_GetBtnDefaultSet(btn, spec)
+function PlexusClickSets_GetBtnDefaultSet(btn, spec)
     local _, c = UnitClass("player")
-    local all = GridClickSets_DefaultSets[c]
+    local all = PlexusClickSets_DefaultSets[c]
     if not all then return {} end
     local set = {}
     for click, v in pairs(all[spec] or all[1] or all) do
@@ -413,8 +413,8 @@ function GridClickSets_GetBtnDefaultSet(btn, spec)
             end
             if type(v) == "number" then
                 if GetSpellInfo(v) then
-                    local defSpec = GridClickSets_SpellList[c][v]
-                    if GridClickSets_MayHaveSpell(defSpec, spec) then
+                    local defSpec = PlexusClickSets_SpellList[c][v]
+                    if PlexusClickSets_MayHaveSpell(defSpec, spec) then
                         set[modi] = { type = "spellId:"..v };
                     end
                 end
@@ -426,26 +426,26 @@ function GridClickSets_GetBtnDefaultSet(btn, spec)
     return set
 end
 
-function GridClickSets_GetDefault(spec)
+function PlexusClickSets_GetDefault(spec)
     local set = {}
     for i=1,GRID_CLICK_SETS_BUTTONS do
-        set[tostring(i)] = GridClickSets_GetBtnDefaultSet(i, spec)
+        set[tostring(i)] = PlexusClickSets_GetBtnDefaultSet(i, spec)
     end
     return set
 end
 
 local secureHeader = CreateFrame("Frame", nil, UIParent, "SecureHandlerBaseTemplate")
 
-function GridClickSets_SetAttributes(frame, set)
-    set = set or GridClickSets_GetDefault()
+function PlexusClickSets_SetAttributes(frame, set)
+    set = set or PlexusClickSets_GetDefault()
 
     for i=1,GRID_CLICK_SETS_BUTTONS do
         local btn = set[tostring(i)] or {};
         for j=1,8 do
-            local modi = GridClickSets_Modifiers[j]
+            local modi = PlexusClickSets_Modifiers[j]
             local set = btn[modi] or {}
 
-            GridClickSets_SetAttribute(frame, i, modi, set.type, set.arg)
+            PlexusClickSets_SetAttribute(frame, i, modi, set.type, set.arg)
         end
     end
 
@@ -455,12 +455,12 @@ function GridClickSets_SetAttributes(frame, set)
     for i=1,2 do
         local btn = set[tostring(GRID_CLICK_SETS_BUTTONS+i)] or {};
         for j=1,8 do
-            local modi = GridClickSets_Modifiers[j]
+            local modi = PlexusClickSets_Modifiers[j]
             local set = btn[modi]
             if(set) then
                 binded = binded + 1
                 script = script.."self:SetBindingClick(1, \""..modi..(i==1 and "MOUSEWHEELUP" or "MOUSEWHEELDOWN").."\", self, \"Button"..(GRID_CLICK_SETS_BUTTONS+binded).."\")"
-                GridClickSets_SetAttribute(frame, GRID_CLICK_SETS_BUTTONS+binded, "", set.type, set.arg)
+                PlexusClickSets_SetAttribute(frame, GRID_CLICK_SETS_BUTTONS+binded, "", set.type, set.arg)
             end
         end
     end
@@ -471,7 +471,7 @@ function GridClickSets_SetAttributes(frame, set)
     secureHeader:WrapScript(frame, "OnLeave", "self:ClearBindings()");
 end
 
-function GridClickSets_SetAttribute(frame, button, modi, type, arg)
+function PlexusClickSets_SetAttribute(frame, button, modi, type, arg)
     --if InCombatLockdown() then return end
 
     if(type==nil or type=="NONE") then

@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-    <Script file="GridClickSetsFrame.lua"/>
-    <Frame name="GridClickSetButtonOptionTemplate" parent="GridClickSetsFramePanelContainer" virtual="true">
+    <Script file="PlexusClickSetsFrame.lua"/>
+    <Frame name="PlexusClickSetButtonOptionTemplate" parent="PlexusClickSetsFramePanelContainer" virtual="true">
         <Size> <AbsDimension x="450" y="25"/> </Size>
         <Layers>
             <Layer level="ARTWORK">
@@ -26,7 +26,7 @@
                 <Scripts>
                     <OnLoad>
                         UIDropDownMenu_SetWidth(self, 270);
-                        UIDropDownMenu_Initialize(self, GridClickSetButton_TypeDropDown_Initialize)
+                        UIDropDownMenu_Initialize(self, PlexusClickSetButton_TypeDropDown_Initialize)
                         UIDropDownMenu_SetSelectedValue(self, "NONE");
                         UIDropDownMenu_JustifyText(self, "LEFT");
                     </OnLoad>
@@ -82,7 +82,7 @@
                             self:Insert("\n")
                         else
                             self:ClearFocus()
-                            GridClickSetsFrame_ApplyOnClick()
+                            PlexusClickSetsFrame_ApplyOnClick()
                         end
                     </OnEnterPressed>
                     <OnEscapePressed>
@@ -98,7 +98,7 @@
                         self:SetText(spell)
                         end
                         end
-                        GridClickSetsFrame_Resize()
+                        PlexusClickSetsFrame_Resize()
                     </OnTextChanged>
                     <OnEditFocusLost>
                         --this:HighlightText(0, 0);
@@ -112,7 +112,7 @@
         </Frames>
     </Frame>
 
-    <Frame name="GridClickSetsFrame" parent="UIParent" hidden="true" enableMouse="true" frameStrata="HIGH">
+    <Frame name="PlexusClickSetsFrame" parent="UIParent" hidden="true" enableMouse="true" frameStrata="HIGH">
         <Size>
             <AbsDimension x="500" y="520"/>
         </Size>
@@ -181,7 +181,7 @@
                 </Anchors>
                 <Scripts>
                     <OnClick>
-                        GridClickSetsFrame_CloseOnClick(self)
+                        PlexusClickSetsFrame_CloseOnClick(self)
                     </OnClick>
                 </Scripts>
             </Button>
@@ -194,7 +194,7 @@
                 </Anchors>
                 <Scripts>
                     <OnClick>
-                        GridClickSetsFrame_CancelOnClick();
+                        PlexusClickSetsFrame_CancelOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -207,7 +207,7 @@
                 </Anchors>
                 <Scripts>
                     <OnClick>
-                        GridClickSetsFrame_ApplyOnClick();
+                        PlexusClickSetsFrame_ApplyOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -224,7 +224,7 @@
                 </Anchors>
                 <Scripts>
                     <OnClick>
-                        GridClickSetsFrame_DefaultsOnClick();
+                        PlexusClickSetsFrame_DefaultsOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -271,10 +271,10 @@
                 <Scripts>
                     <OnClick>
                         PlaySound(841);
-                        GridClickSetsFrame_SaveOnClick()
-                        PanelTemplates_Tab_OnClick(self, GridClickSetsFrame);
-                        PanelTemplates_UpdateTabs(GridClickSetsFrame);
-                        GridClickSetsFrame_TabOnClick();
+                        PlexusClickSetsFrame_SaveOnClick()
+                        PanelTemplates_Tab_OnClick(self, PlexusClickSetsFrame);
+                        PanelTemplates_UpdateTabs(PlexusClickSetsFrame);
+                        PlexusClickSetsFrame_TabOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -289,10 +289,10 @@
                 <Scripts>
                     <OnClick>
                         PlaySound(841);
-                        GridClickSetsFrame_SaveOnClick()
-                        PanelTemplates_Tab_OnClick(self, GridClickSetsFrame);
-                        PanelTemplates_UpdateTabs(GridClickSetsFrame);
-                        GridClickSetsFrame_TabOnClick();
+                        PlexusClickSetsFrame_SaveOnClick()
+                        PanelTemplates_Tab_OnClick(self, PlexusClickSetsFrame);
+                        PanelTemplates_UpdateTabs(PlexusClickSetsFrame);
+                        PlexusClickSetsFrame_TabOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -307,10 +307,10 @@
                 <Scripts>
                     <OnClick>
                         PlaySound(841);
-                        GridClickSetsFrame_SaveOnClick()
-                        PanelTemplates_Tab_OnClick(self, GridClickSetsFrame);
-                        PanelTemplates_UpdateTabs(GridClickSetsFrame);
-                        GridClickSetsFrame_TabOnClick();
+                        PlexusClickSetsFrame_SaveOnClick()
+                        PanelTemplates_Tab_OnClick(self, PlexusClickSetsFrame);
+                        PanelTemplates_UpdateTabs(PlexusClickSetsFrame);
+                        PlexusClickSetsFrame_TabOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -325,10 +325,10 @@
                 <Scripts>
                     <OnClick>
                         PlaySound(841);
-                        GridClickSetsFrame_SaveOnClick()
-                        PanelTemplates_Tab_OnClick(self, GridClickSetsFrame);
-                        PanelTemplates_UpdateTabs(GridClickSetsFrame);
-                        GridClickSetsFrame_TabOnClick();
+                        PlexusClickSetsFrame_SaveOnClick()
+                        PanelTemplates_Tab_OnClick(self, PlexusClickSetsFrame);
+                        PanelTemplates_UpdateTabs(PlexusClickSetsFrame);
+                        PlexusClickSetsFrame_TabOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -343,10 +343,10 @@
                 <Scripts>
                     <OnClick>
                         PlaySound(841);
-                        GridClickSetsFrame_SaveOnClick()
-                        PanelTemplates_Tab_OnClick(self, GridClickSetsFrame);
-                        PanelTemplates_UpdateTabs(GridClickSetsFrame);
-                        GridClickSetsFrame_TabOnClick();
+                        PlexusClickSetsFrame_SaveOnClick()
+                        PanelTemplates_Tab_OnClick(self, PlexusClickSetsFrame);
+                        PanelTemplates_UpdateTabs(PlexusClickSetsFrame);
+                        PlexusClickSetsFrame_TabOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -361,10 +361,10 @@
                 <Scripts>
                     <OnClick>
                         PlaySound(841);
-                        GridClickSetsFrame_SaveOnClick()
-                        PanelTemplates_Tab_OnClick(self, GridClickSetsFrame);
-                        PanelTemplates_UpdateTabs(GridClickSetsFrame);
-                        GridClickSetsFrame_TabOnClick();
+                        PlexusClickSetsFrame_SaveOnClick()
+                        PanelTemplates_Tab_OnClick(self, PlexusClickSetsFrame);
+                        PanelTemplates_UpdateTabs(PlexusClickSetsFrame);
+                        PlexusClickSetsFrame_TabOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -379,36 +379,36 @@
                 <Scripts>
                     <OnClick>
                         PlaySound(841);
-                        GridClickSetsFrame_SaveOnClick()
-                        PanelTemplates_Tab_OnClick(self, GridClickSetsFrame);
-                        PanelTemplates_UpdateTabs(GridClickSetsFrame);
-                        GridClickSetsFrame_TabOnClick();
+                        PlexusClickSetsFrame_SaveOnClick()
+                        PanelTemplates_Tab_OnClick(self, PlexusClickSetsFrame);
+                        PanelTemplates_UpdateTabs(PlexusClickSetsFrame);
+                        PlexusClickSetsFrame_TabOnClick();
                     </OnClick>
                 </Scripts>
             </Button>
 
-            <Frame name="GridClickSetButton1" inherits="GridClickSetButtonOptionTemplate" ID="1">
+            <Frame name="PlexusClickSetButton1" inherits="PlexusClickSetButtonOptionTemplate" ID="1">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="GridClickSetsFramePanelContainer">
+                    <Anchor point="TOPLEFT" relativeTo="PlexusClickSetsFramePanelContainer">
                         <Offset> <AbsDimension x="10" y="0"/>	</Offset>
                     </Anchor>
                 </Anchors>
             </Frame>
-            <Frame name="GridClickSetButton2" inherits="GridClickSetButtonOptionTemplate" ID="2"/>
-            <Frame name="GridClickSetButton3" inherits="GridClickSetButtonOptionTemplate" ID="3"/>
-            <Frame name="GridClickSetButton4" inherits="GridClickSetButtonOptionTemplate" ID="4"/>
-            <Frame name="GridClickSetButton5" inherits="GridClickSetButtonOptionTemplate" ID="5"/>
-            <Frame name="GridClickSetButton6" inherits="GridClickSetButtonOptionTemplate" ID="6"/>
-            <Frame name="GridClickSetButton7" inherits="GridClickSetButtonOptionTemplate" ID="7"/>
-            <Frame name="GridClickSetButton8" inherits="GridClickSetButtonOptionTemplate" ID="8"/>
+            <Frame name="PlexusClickSetButton2" inherits="PlexusClickSetButtonOptionTemplate" ID="2"/>
+            <Frame name="PlexusClickSetButton3" inherits="PlexusClickSetButtonOptionTemplate" ID="3"/>
+            <Frame name="PlexusClickSetButton4" inherits="PlexusClickSetButtonOptionTemplate" ID="4"/>
+            <Frame name="PlexusClickSetButton5" inherits="PlexusClickSetButtonOptionTemplate" ID="5"/>
+            <Frame name="PlexusClickSetButton6" inherits="PlexusClickSetButtonOptionTemplate" ID="6"/>
+            <Frame name="PlexusClickSetButton7" inherits="PlexusClickSetButtonOptionTemplate" ID="7"/>
+            <Frame name="PlexusClickSetButton8" inherits="PlexusClickSetButtonOptionTemplate" ID="8"/>
         </Frames>
 
         <Scripts>
-            <OnLoad function="GridClickSetsFrame_OnLoad"/>
-            <OnEvent function="GridClickSetsFrame_OnEvent"/>
+            <OnLoad function="PlexusClickSetsFrame_OnLoad"/>
+            <OnEvent function="PlexusClickSetsFrame_OnEvent"/>
             <OnShow>
-                GridClickSetsFrameClose:SetText(self.lastFrame and PREVIOUS or CLOSE)
-                GridClickSetsFrame_TabOnClick();
+                PlexusClickSetsFrameClose:SetText(self.lastFrame and PREVIOUS or CLOSE)
+                PlexusClickSetsFrame_TabOnClick();
             </OnShow>
         </Scripts>
     </Frame>

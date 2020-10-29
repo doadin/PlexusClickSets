@@ -24,23 +24,23 @@ if not addon.DependOn then
     end
 end
 
-if select(5, GetAddOnInfo("Grid")) == "MISSING" then
+if select(5, GetAddOnInfo("Plexus")) == "MISSING" then
     return
 end
 
-addon.DependOn("Grid", function()
+addon.DependOn("Plexus", function()
 
-    local GridFrame = Grid:GetModule("GridFrame")
+    local PlexusFrame = Plexus:GetModule("PlexusFrame")
 
-    local function WithAllGridFrames(func)
-        for _, frame in pairs(GridFrame.registeredFrames) do
+    local function WithAllPlexusFrames(func)
+        for _, frame in pairs(PlexusFrame.registeredFrames) do
        		func(frame)
        	end
     end
 
-    GridClickSets = Grid:NewModule("GridClickSets")
+    PlexusClickSets = Plexus:NewModule("PlexusClickSets")
 
-    function GridFrameDropDown_Initialize(self)
+    function PlexusFrameDropDown_Initialize(self)
         local unit = self:GetParent().unit;
         if ( not unit ) then
             return;
@@ -75,20 +75,20 @@ addon.DependOn("Grid", function()
         end
     end
 
-    local function initializeFrame(gridFrameObj, frame)
+    local function initializeFrame(plexusFrameObj, frame)
         frame.dropDown = CreateFrame("Frame", frame:GetName().."DropDown", frame, "UIDropDownMenuTemplate");
         frame.dropDown:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 0, 2);
-        UIDropDownMenu_Initialize(frame.dropDown, GridFrameDropDown_Initialize, "MENU");
+        UIDropDownMenu_Initialize(frame.dropDown, PlexusFrameDropDown_Initialize, "MENU");
         frame.menu = function()
             ToggleDropDownMenu(1, nil, frame.dropDown, frame:GetName(), 0, 0);
         end
         frame:SetAttribute("*type2", "menu");
         frame.dropDown:Hide();
-        GridClickSets_SetAttributes(frame, GridClickSetsFrame_GetCurrentSet());
+        PlexusClickSets_SetAttributes(frame, PlexusClickSetsFrame_GetCurrentSet());
     end
 
-    hooksecurefunc(GridFrame, "InitializeFrame", initializeFrame)
-    if IsLoggedIn() and GridFrame.registeredFrames then WithAllGridFrames(function(f) initializeFrame(nil, f) end) end
+    hooksecurefunc(PlexusFrame, "InitializeFrame", initializeFrame)
+    if IsLoggedIn() and PlexusFrame.registeredFrames then WithAllPlexusFrames(function(f) initializeFrame(nil, f) end) end
 
     local options = {
         type = "execute",
@@ -99,28 +99,28 @@ addon.DependOn("Grid", function()
             if InterfaceOptionsFrame:IsVisible() then
                 InterfaceOptionsFrame.lastFrame = nil
                 HideUIPanel(InterfaceOptionsFrame, true)
-                GridClickSetsFrame.lastFrame = InterfaceOptionsFrame
+                PlexusClickSetsFrame.lastFrame = InterfaceOptionsFrame
             else
-                LibStub("AceConfigDialog-3.0"):Close("Grid")
-                GridClickSetsFrame.lastFrame = function() LibStub("AceConfigDialog-3.0"):Open("Grid") end
+                LibStub("AceConfigDialog-3.0"):Close("Plexus")
+                PlexusClickSetsFrame.lastFrame = function() LibStub("AceConfigDialog-3.0"):Open("Plexus") end
             end
-            GridClickSetsFrame:Show();
+            PlexusClickSetsFrame:Show();
             GameTooltip:Hide();
         end
     }
 
-    GridClickSets.options = { type = "group", name = options.name, order = options.order, args = { button = options } }
+    PlexusClickSets.options = { type = "group", name = options.name, order = options.order, args = { button = options } }
 
-    function GridClickSets:OnEnable()
-        --the profile no longer work with grid.
+    function PlexusClickSets:OnEnable()
+        --the profile no longer work with plexus.
     end
 
-    function GridClickSets:Reset()
-        --the profile no longer work with grid.
+    function PlexusClickSets:Reset()
+        --the profile no longer work with plexus.
     end
 
-    table.insert(GridClickSetsFrame_Updates, function(set)
-        WithAllGridFrames(function (f) GridClickSets_SetAttributes(f, set) end)
+    table.insert(PlexusClickSetsFrame_Updates, function(set)
+        WithAllPlexusFrames(function (f) PlexusClickSets_SetAttributes(f, set) end)
     end);
 
 end)
