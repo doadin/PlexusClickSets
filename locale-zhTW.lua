@@ -1,10 +1,9 @@
-if(GetLocale()=="zhTW") then
-GRIDCLICKSETS_MENUNAME = "點擊施法設置"
-GRIDCLICKSETS_MENUTIP = "設置血條按鈕的點擊動作, 例如施法, 協助等."
-GRIDCLICKSETS_TITLE = "點擊施法設置"
-GRIDCLICKSETS_LOCKWARNING = "戰鬥中無法設置按鈕屬性, 設置已保存, 脫離戰鬥后自動生效。"
-GRIDCLICKSETS_SET = "Plexus點擊施法已更新設置。"
-GRIDCLICKSETS_SET_WHEEL_UP = "上滾"
-GRIDCLICKSETS_SET_WHEEL_DOWN = "下滾"
-GRIDCLICKSETS_SET_RESET_WARNING = "當前專精的設置將全部重置且無法恢復！"
-end
+local L = LibStub("AceLocale-3.0"):NewLocale("PlexusClickSets", "zhTW", true)
+L["Click Set"] = "點擊施法設置"
+L["Sets the clicking actions for every unit button."] = "設置血條按鈕的點擊動作, 例如施法, 協助等."
+L["Plexus Click Sets"] = "點擊施法設置"
+L["Can't set attributes during combat, settings will be applied later."] = "戰鬥中無法設置按鈕屬性, 設置已保存, 脫離戰鬥后自動生效。"
+L["Plexus Click Sets has been applied."] = "Plexus點擊施法已更新設置。"
+L["W.Up"] = "上滾"
+L["Down"] = "下滾"
+L["All clickset for current specialization will lost!"] = "當前專精的設置將全部重置且無法恢復！"

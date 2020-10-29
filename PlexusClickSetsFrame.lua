@@ -1,3 +1,4 @@
+local L = LibStub("AceLocale-3.0"):GetLocale("PlexusClickSets")
 local i
 local queue = false
 local function makeMovable(frame)
@@ -290,24 +291,24 @@ function PlexusClickSetsFrame_UpdateAll(silent)
     if PlexusClickSetsFrame:IsVisible() then PlexusClickSetsFrame_TabOnClick() end
     if(InCombatLockdown()) then
         queue = true
-        if not silent then DEFAULT_CHAT_FRAME:AddMessage(GRIDCLICKSETS_LOCKWARNING, 1, 0, 0) end
+        if not silent then DEFAULT_CHAT_FRAME:AddMessage(L["Can't set attributes during combat, settings will be applied later."], 1, 0, 0) end
     else
         for _, v in pairs(PlexusClickSetsFrame_Updates) do
             v(set)
         end
-        if not silent then DEFAULT_CHAT_FRAME:AddMessage(GRIDCLICKSETS_SET, 1, 1, 0) end
+        if not silent then DEFAULT_CHAT_FRAME:AddMessage(L["Plexus Click Sets has been applied."], 1, 1, 0) end
     end
 end
 
 SLASH_CLICKSET1 = "/clicksets";
-SLASH_CLICKSET2 = "/gcs";
+SLASH_CLICKSET2 = "/pcs";
 SLASH_CLICKSET3 = "/plexusclicksets";
 SlashCmdList["CLICKSET"] = function(msg)
     if PlexusClickSetsFrame:IsVisible() then PlexusClickSetsFrame:Hide() else PlexusClickSetsFrame:Show() end
 end
 
 StaticPopupDialogs['PlexusClickSets_Reset'] = {preferredIndex = 3,
-	text = GRIDCLICKSETS_SET_RESET_WARNING,
+	text = L["All clickset for current specialization will lost!"],
 	button1 = YES,
 	button2 = NO,
 	OnAccept = function(self) PlexusClickSetsFrame_DefaultsOnClick("YES") end,
