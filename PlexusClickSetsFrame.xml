@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
     <Script file="PlexusClickSetsFrame.lua"/>
-    <Frame name="PlexusClickSetButtonOptionTemplate" parent="PlexusClickSetsFramePanelContainer" virtual="true">
+    <Frame name="PlexusClickSetButtonOptionTemplate" parent="PlexusClickSetsFramePanelContainer" virtual="true" inherits="BackdropTemplate" >
         <Size> <AbsDimension x="450" y="25"/> </Size>
         <Layers>
             <Layer level="ARTWORK">
@@ -17,7 +17,7 @@
         </Layers>
 
         <Frames>
-            <Frame name="$parentType" inherits="UIDropDownMenuTemplate">
+            <Frame name="$parentType" inherits="UIDropDownMenuTemplate,BackdropTemplate">
                 <Anchors>
                     <Anchor point="TOPRIGHT">
                         <Offset> <AbsDimension x="0" y="-5"/> </Offset>
@@ -112,7 +112,7 @@
         </Frames>
     </Frame>
 
-    <Frame name="PlexusClickSetsFrame" parent="UIParent" hidden="true" enableMouse="true" frameStrata="HIGH">
+    <Frame name="PlexusClickSetsFrame" parent="UIParent" hidden="true" enableMouse="true" frameStrata="HIGH" inherits="BackdropTemplate" >
         <Size>
             <AbsDimension x="500" y="520"/>
         </Size>
@@ -229,7 +229,7 @@
                 </Scripts>
             </Button>
 
-            <Frame name="$parentPanelContainer">
+            <Frame name="$parentPanelContainer" inherits="BackdropTemplate">
                 <Anchors>
                     <Anchor point="TOPLEFT">
                         <Offset>
@@ -387,7 +387,7 @@
                 </Scripts>
             </Button>
 
-            <Frame name="PlexusClickSetButton1" inherits="PlexusClickSetButtonOptionTemplate" ID="1">
+            <Frame name="PlexusClickSetButton1" inherits="PlexusClickSetButtonOptionTemplate,BackdropTemplate" ID="1">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="PlexusClickSetsFramePanelContainer">
                         <Offset> <AbsDimension x="10" y="0"/>	</Offset>
