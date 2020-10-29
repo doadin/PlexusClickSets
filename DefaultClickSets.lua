@@ -1,8 +1,8 @@
 --/run for _, v in pairs(PlexusClickSets_DefaultSets) do for _, v2 in pairs(v) do for _, v3 in next, v2 do if not GetSpellInfo(v3) then print(v3, GetSpellInfo(v3)) end end end end
-GRID_CLICK_SETS_BUTTONS = 5 --max buttons, another 2 more for wheel up & wheel down
+local PLEXUS_CLICK_SETS_BUTTONS = 5 --max buttons, another 2 more for wheel up & wheel down
 local assist = { type = "assist" }
 
-PlexusClickSets_DefaultSets = {
+local PlexusClickSets_DefaultSets = {
     PRIEST = {
         [1] = {
             ["1-shift"]	    = 186263,--暗影愈合
@@ -221,7 +221,7 @@ PlexusClickSets_DefaultSets = {
     }
 }
 
-PlexusClickSets_SpellList = {
+PlexusClickSets_SpellList = { --luacheck:ignore 111
     PRIEST = {
         [17] = -2,	--真言术：盾  3暗影2神圣1戒律
         [200829] = 1,	--恳求 buff 194384
@@ -347,7 +347,7 @@ PlexusClickSets_SpellList = {
 }
 
 if GetLocale() == "zhCN" then
-    PlexusClickSets_Titles = {
+    PlexusClickSets_Titles = { --luacheck:ignore 111
         "直接点击 :",
         "Ctrl 点击 :",
         "Alt  点击 :",
@@ -358,7 +358,7 @@ if GetLocale() == "zhCN" then
         "C + S + A :",
     }
 else
-    PlexusClickSets_Titles = {
+    PlexusClickSets_Titles = { --luacheck:ignore 111
         "Direct  Click :",
         "Ctrl +  Click :",
         "Alt  +  Click :",
@@ -370,7 +370,7 @@ else
     }
 end
 
-PlexusClickSets_Modifiers = {
+PlexusClickSets_Modifiers = { --luacheck:ignore 111
     "",
     "ctrl-",
     "alt-",
@@ -382,16 +382,16 @@ PlexusClickSets_Modifiers = {
 }
 
 --for check deleted spells
-function PlexusClickSets_Check()
+local function PlexusClickSets_Check() --luacheck:ignore 211
     for clz, set in pairs(PlexusClickSets_SpellList) do
-        for spellId, talent in pairs(set) do
+        for spellId, _ in pairs(set) do
             if not GetSpellInfo(spellId) then ChatFrame1:AddMessage(clz .. " " .. spellId); end
         end
     end
 end
 
 --defSpec is value in PlexusClickSets_SpellList, defSpec < 0 stands for not that spec
-function PlexusClickSets_MayHaveSpell(defSpec, currSpec)
+function PlexusClickSets_MayHaveSpell(defSpec, currSpec) --luacheck:ignore 111
     if defSpec == nil or defSpec == 0 or (defSpec > 0 and currSpec == defSpec) or (defSpec < 0 and currSpec ~= -1 * defSpec) then
         return true
     else
@@ -400,13 +400,13 @@ function PlexusClickSets_MayHaveSpell(defSpec, currSpec)
 end
 
 --Get default for one mouse button, useful when Reset on GUI, but no longer used after 2016.9
-function PlexusClickSets_GetBtnDefaultSet(btn, spec)
+local function PlexusClickSets_GetBtnDefaultSet(btn, spec)
     local _, c = UnitClass("player")
     local all = PlexusClickSets_DefaultSets[c]
     if not all then return {} end
     local set = {}
     for click, v in pairs(all[spec] or all[1] or all) do
-        local _, _, button, dash, modi = click:find("([0-9])(%-?)(.-)%-?$")
+        local _, _, button, _, modi = click:find("([0-9])(%-?)(.-)%-?$")
         if button == tostring(btn) then
             if modi ~= "" then
                 modi = modi .. "-"
@@ -426,9 +426,9 @@ function PlexusClickSets_GetBtnDefaultSet(btn, spec)
     return set
 end
 
-function PlexusClickSets_GetDefault(spec)
+function PlexusClickSets_GetDefault(spec) --luacheck:ignore 111
     local set = {}
-    for i=1,GRID_CLICK_SETS_BUTTONS do
+    for i=1,PLEXUS_CLICK_SETS_BUTTONS do
         set[tostring(i)] = PlexusClickSets_GetBtnDefaultSet(i, spec)
     end
     return set
@@ -436,14 +436,14 @@ end
 
 local secureHeader = CreateFrame("Frame", nil, UIParent, "SecureHandlerBaseTemplate")
 
-function PlexusClickSets_SetAttributes(frame, set)
+function PlexusClickSets_SetAttributes(frame, set) --luacheck:ignore 111
     set = set or PlexusClickSets_GetDefault()
 
-    for i=1,GRID_CLICK_SETS_BUTTONS do
-        local btn = set[tostring(i)] or {};
+    for i=1,PLEXUS_CLICK_SETS_BUTTONS do
+        --local btn = set[tostring(i)] or {};
         for j=1,8 do
             local modi = PlexusClickSets_Modifiers[j]
-            local set = btn[modi] or {}
+            --local set = btn[modi] or {}
 
             PlexusClickSets_SetAttribute(frame, i, modi, set.type, set.arg)
         end
@@ -453,14 +453,14 @@ function PlexusClickSets_SetAttributes(frame, set)
     local binded = 0
     local script = "self:ClearBindings()";
     for i=1,2 do
-        local btn = set[tostring(GRID_CLICK_SETS_BUTTONS+i)] or {};
+        --local btn = set[tostring(PLEXUS_CLICK_SETS_BUTTONS+i)] or {};
         for j=1,8 do
             local modi = PlexusClickSets_Modifiers[j]
-            local set = btn[modi]
+            --local set = btn[modi]
             if(set) then
                 binded = binded + 1
-                script = script.."self:SetBindingClick(1, \""..modi..(i==1 and "MOUSEWHEELUP" or "MOUSEWHEELDOWN").."\", self, \"Button"..(GRID_CLICK_SETS_BUTTONS+binded).."\")"
-                PlexusClickSets_SetAttribute(frame, GRID_CLICK_SETS_BUTTONS+binded, "", set.type, set.arg)
+                script = script.."self:SetBindingClick(1, \""..modi..(i==1 and "MOUSEWHEELUP" or "MOUSEWHEELDOWN").."\", self, \"Button"..(PLEXUS_CLICK_SETS_BUTTONS+binded).."\")"
+                PlexusClickSets_SetAttribute(frame, PLEXUS_CLICK_SETS_BUTTONS+binded, "", set.type, set.arg)
             end
         end
     end
@@ -471,7 +471,7 @@ function PlexusClickSets_SetAttributes(frame, set)
     secureHeader:WrapScript(frame, "OnLeave", "self:ClearBindings()");
 end
 
-function PlexusClickSets_SetAttribute(frame, button, modi, type, arg)
+local function PlexusClickSets_SetAttribute(frame, button, modi, type, arg) --luacheck:ignore 211
     --if InCombatLockdown() then return end
 
     if(type==nil or type=="NONE") then
