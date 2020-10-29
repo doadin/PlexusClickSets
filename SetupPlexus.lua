@@ -5,7 +5,7 @@ if not addon.DependOn then
     local eventFrame = CreateFrame("Frame");
     local all_funcs = {}
     eventFrame:RegisterEvent("ADDON_LOADED")
-    eventFrame:SetScript("OnEvent", function(self, event, addon)
+    eventFrame:SetScript("OnEvent", function(self, event, addon) --luacheck:ignore 212 431
         local funcs = all_funcs[addon]
         if not funcs then return end
         for i=#funcs, 1, -1 do
@@ -14,7 +14,7 @@ if not addon.DependOn then
         all_funcs[addon] = nil
     end)
 
-    addon.DependOn = function(addon, func)
+    addon.DependOn = function(addon, func) --luacheck:ignore 431
         if(IsAddOnLoaded(addon)) then
             func()
         else
@@ -34,13 +34,13 @@ addon.DependOn("Plexus", function()
 
     local function WithAllPlexusFrames(func)
         for _, frame in pairs(PlexusFrame.registeredFrames) do
-       		func(frame)
-       	end
+               func(frame)
+           end
     end
 
-    PlexusClickSets = Plexus:NewModule("PlexusClickSets")
+    PlexusClickSets = Plexus:NewModule("PlexusClickSets") --luacheck:ignore 111
 
-    function PlexusFrameDropDown_Initialize(self)
+    function PlexusFrameDropDown_Initialize(self) --luacheck:ignore 111
         local unit = self:GetParent().unit;
         if ( not unit ) then
             return;
@@ -75,7 +75,7 @@ addon.DependOn("Plexus", function()
         end
     end
 
-    local function initializeFrame(plexusFrameObj, frame)
+    local function initializeFrame(plexusFrameObj, frame) --luacheck:ignore 212
         frame.dropDown = CreateFrame("Frame", frame:GetName().."DropDown", frame, "UIDropDownMenuTemplate");
         frame.dropDown:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 0, 2);
         UIDropDownMenu_Initialize(frame.dropDown, PlexusFrameDropDown_Initialize, "MENU");
@@ -97,25 +97,25 @@ addon.DependOn("Plexus", function()
         order = 0.1,
         func = function()
             if InterfaceOptionsFrame:IsVisible() then
-                InterfaceOptionsFrame.lastFrame = nil
+                InterfaceOptionsFrame.lastFrame = nil --luacheck:ignore 112
                 HideUIPanel(InterfaceOptionsFrame, true)
-                PlexusClickSetsFrame.lastFrame = InterfaceOptionsFrame
+                PlexusClickSetsFrame.lastFrame = InterfaceOptionsFrame --luacheck:ignore 112
             else
                 LibStub("AceConfigDialog-3.0"):Close("Plexus")
-                PlexusClickSetsFrame.lastFrame = function() LibStub("AceConfigDialog-3.0"):Open("Plexus") end
+                PlexusClickSetsFrame.lastFrame = function() LibStub("AceConfigDialog-3.0"):Open("Plexus") end --luacheck:ignore 112
             end
             PlexusClickSetsFrame:Show();
             GameTooltip:Hide();
         end
     }
 
-    PlexusClickSets.options = { type = "group", name = options.name, order = options.order, args = { button = options } }
+    PlexusClickSets.options = { type = "group", name = options.name, order = options.order, args = { button = options } } --luacheck:ignore 112
 
-    function PlexusClickSets:OnEnable()
+    function PlexusClickSets:OnEnable() --luacheck:ignore 112 212
         --the profile no longer work with plexus.
     end
 
-    function PlexusClickSets:Reset()
+    function PlexusClickSets:Reset() --luacheck:ignore 112 212
         --the profile no longer work with plexus.
     end
 
