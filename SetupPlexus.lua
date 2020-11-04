@@ -92,8 +92,8 @@ addon.DependOn("Plexus", function()
 
     local options = {
         type = "execute",
-        name = L["Click Set"],
-        desc = L["Sets the clicking actions for every unit button."],
+        name = PLEXUSCLICKSETS_MENUNAME,
+        desc = PLEXUSCLICKSETS_MENUTIP,
         order = 0.1,
         func = function()
             if InterfaceOptionsFrame:IsVisible() then

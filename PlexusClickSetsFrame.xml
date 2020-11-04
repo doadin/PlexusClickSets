@@ -119,17 +119,6 @@
         <Anchors>
             <Anchor point="CENTER"/>
         </Anchors>
-        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-            <BackgroundInsets>
-                <AbsInset left="11" right="11" top="12" bottom="10"/>
-            </BackgroundInsets>
-            <TileSize>
-                <AbsValue val="32"/>
-            </TileSize>
-            <EdgeSize>
-                <AbsValue val="32"/>
-            </EdgeSize>
-        </Backdrop>
         <Layers>
             <Layer level="ARTWORK">
                 <Texture name="$parentHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
@@ -144,7 +133,7 @@
                         </Anchor>
                     </Anchors>
                 </Texture>
-                <FontString name="$parentHeaderText" inherits="GameFontNormal" text="GRIDCLICKSETS_TITLE">
+                <FontString name="$parentHeaderText" inherits="GameFontNormal" text="PLEXUSCLICKSETS_TITLE">
                     <Anchors>
                         <Anchor point="TOP" relativeTo="$parentHeader">
                             <Offset>
@@ -350,7 +339,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentTab6" inherits="OptionsFrameTabButtonTemplate" text="GRIDCLICKSETS_SET_WHEEL_UP" id="6" hidden="false">
+            <Button name="$parentTab6" inherits="OptionsFrameTabButtonTemplate" text="PLEXUSCLICKSETS_SET_WHEEL_UP" id="6" hidden="false">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentTab5" relativePoint="TOPRIGHT">
                         <Offset>
@@ -368,7 +357,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentTab7" inherits="OptionsFrameTabButtonTemplate" text="GRIDCLICKSETS_SET_WHEEL_DOWN" id="7" hidden="false">
+            <Button name="$parentTab7" inherits="OptionsFrameTabButtonTemplate" text="PLEXUSCLICKSETS_SET_WHEEL_DOWN" id="7" hidden="false">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentTab6" relativePoint="TOPRIGHT">
                         <Offset>

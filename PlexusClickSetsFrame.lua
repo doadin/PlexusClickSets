@@ -1,6 +1,7 @@
-local L = LibStub("AceLocale-3.0"):GetLocale("PlexusClickSets")
+--local L = LibStub("AceLocale-3.0"):GetLocale("PlexusClickSets")
 local i
 local queue = false
+
 local function makeMovable(frame)
     local mover = _G[frame:GetName() .. "Mover"] or CreateFrame("Frame", frame:GetName() .. "Mover", frame)
     mover:EnableMouse(true)
@@ -22,8 +23,18 @@ function PlexusClickSetsFrame_OnLoad(self)
     self:RegisterEvent("VARIABLES_LOADED");
     self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
     self:RegisterEvent("PLAYER_ALIVE");
+    self:SetBackdrop({
+        bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+        edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+        tile = true,
+        tileEdge = true,
+        tileSize = 32,
+        edgeSize = 32,
+        insets = { left = 11, right = 11, top = 12, bottom = 10 },
+    });
+
     makeMovable(self)
-    PanelTemplates_SetNumTabs(self, GRID_CLICK_SETS_BUTTONS + 2);
+    PanelTemplates_SetNumTabs(self, PLEXUS_CLICK_SETS_BUTTONS + 2);
     self.selectedTab = 1;
     PanelTemplates_UpdateTabs(self);
 
@@ -282,7 +293,7 @@ function PlexusClickSetsFrame_GetCurrentSet()
         PlexusClickSetsForTalents[spec] = PlexusClickSets_GetDefault(spec);
     end
     local set = PlexusClickSetsForTalents[spec]
-    for i=1, GRID_CLICK_SETS_BUTTONS+2 do set[tostring(i)] = set[tostring(i)] or {} end
+    for i=1, PLEXUS_CLICK_SETS_BUTTONS+2 do set[tostring(i)] = set[tostring(i)] or {} end
     return set
 end
 
@@ -291,12 +302,12 @@ function PlexusClickSetsFrame_UpdateAll(silent)
     if PlexusClickSetsFrame:IsVisible() then PlexusClickSetsFrame_TabOnClick() end
     if(InCombatLockdown()) then
         queue = true
-        if not silent then DEFAULT_CHAT_FRAME:AddMessage(L["Can't set attributes during combat, settings will be applied later."], 1, 0, 0) end
+        if not silent then DEFAULT_CHAT_FRAME:AddMessage(PLEXUSCLICKSETS_LOCKWARNING, 1, 0, 0) end
     else
         for _, v in pairs(PlexusClickSetsFrame_Updates) do
             v(set)
         end
-        if not silent then DEFAULT_CHAT_FRAME:AddMessage(L["Plexus Click Sets has been applied."], 1, 1, 0) end
+        if not silent then DEFAULT_CHAT_FRAME:AddMessage(PLEXUSCLICKSETS_SET, 1, 1, 0) end
     end
 end
 
@@ -308,7 +319,7 @@ SlashCmdList["CLICKSET"] = function(msg)
 end
 
 StaticPopupDialogs['PlexusClickSets_Reset'] = {preferredIndex = 3,
-	text = L["All clickset for current specialization will lost!"],
+	text = PLEXUSCLICKSETS_SET_RESET_WARNING,
 	button1 = YES,
 	button2 = NO,
 	OnAccept = function(self) PlexusClickSetsFrame_DefaultsOnClick("YES") end,

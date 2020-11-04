@@ -1,5 +1,5 @@
 --/run for _, v in pairs(PlexusClickSets_DefaultSets) do for _, v2 in pairs(v) do for _, v3 in next, v2 do if not GetSpellInfo(v3) then print(v3, GetSpellInfo(v3)) end end end end
-GRID_CLICK_SETS_BUTTONS = 5 --max buttons, another 2 more for wheel up & wheel down
+PLEXUS_CLICK_SETS_BUTTONS = 5 --max buttons, another 2 more for wheel up & wheel down
 local assist = { type = "assist" }
 
 PlexusClickSets_DefaultSets = {
@@ -428,7 +428,7 @@ end
 
 function PlexusClickSets_GetDefault(spec)
     local set = {}
-    for i=1,GRID_CLICK_SETS_BUTTONS do
+    for i=1,PLEXUS_CLICK_SETS_BUTTONS do
         set[tostring(i)] = PlexusClickSets_GetBtnDefaultSet(i, spec)
     end
     return set
@@ -439,7 +439,7 @@ local secureHeader = CreateFrame("Frame", nil, UIParent, "SecureHandlerBaseTempl
 function PlexusClickSets_SetAttributes(frame, set)
     set = set or PlexusClickSets_GetDefault()
 
-    for i=1,GRID_CLICK_SETS_BUTTONS do
+    for i=1,PLEXUS_CLICK_SETS_BUTTONS do
         local btn = set[tostring(i)] or {};
         for j=1,8 do
             local modi = PlexusClickSets_Modifiers[j]
@@ -453,14 +453,14 @@ function PlexusClickSets_SetAttributes(frame, set)
     local binded = 0
     local script = "self:ClearBindings()";
     for i=1,2 do
-        local btn = set[tostring(GRID_CLICK_SETS_BUTTONS+i)] or {};
+        local btn = set[tostring(PLEXUS_CLICK_SETS_BUTTONS+i)] or {};
         for j=1,8 do
             local modi = PlexusClickSets_Modifiers[j]
             local set = btn[modi]
             if(set) then
                 binded = binded + 1
-                script = script.."self:SetBindingClick(1, \""..modi..(i==1 and "MOUSEWHEELUP" or "MOUSEWHEELDOWN").."\", self, \"Button"..(GRID_CLICK_SETS_BUTTONS+binded).."\")"
-                PlexusClickSets_SetAttribute(frame, GRID_CLICK_SETS_BUTTONS+binded, "", set.type, set.arg)
+                script = script.."self:SetBindingClick(1, \""..modi..(i==1 and "MOUSEWHEELUP" or "MOUSEWHEELDOWN").."\", self, \"Button"..(PLEXUS_CLICK_SETS_BUTTONS+binded).."\")"
+                PlexusClickSets_SetAttribute(frame, PLEXUS_CLICK_SETS_BUTTONS+binded, "", set.type, set.arg)
             end
         end
     end
