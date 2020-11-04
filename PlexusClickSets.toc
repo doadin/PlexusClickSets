@@ -1,10 +1,5 @@
-#@retail@
 ## Interface: 90001
-#@end-retail@
-#@non-retail@
-## Interface: 11305
-#@end-non-retail@
-## Version: @project-version@
+## Version: v0.1.3-alpha
 ## Title: PlexusClickSets
 ## Notes: PlexusClickSets.
 ## Author: Doadin
@@ -13,7 +8,18 @@
 ## X-License: GNU General Public License (GPL) Version 2
 ## X-Website: https://wow.curseforge.com/projects/plexusclicksets/
 ## X-Curse-Project-ID: 416218
+## SavedVariables: PlexusClickSetsDB
 
+Libs\AceAddon-3.0\AceAddon-3.0.lua
+Libs\AceConfig-3.0\AceConfig-3.0.lua
+Libs\AceConsole-3.0\AceConsole-3.0.lua
+Libs\AceConfig-3.0\AceConfigCmd-3.0\AceConfigCmd-3.0.lua
+Libs\AceConfig-3.0\AceConfigDialog-3.0\AceConfigDialog-3.0.lua
+Libs\AceConfig-3.0\AceConfigRegistry-3.0\AceConfigRegistry-3.0.lua
+Libs\AceDB-3.0\AceDB-3.0.lua
+Libs\AceDBOptions-3.0\AceDBOptions-3.0.lua
+Libs\AceEvent-3.0\AceEvent-3.0.lua
+Libs\AceGUI-3.0\AceGUI-3.0.lua
 Libs\AceLocale-3.0\AceLocale-3.0.lua
 
 locale-enUS.lua
@@ -22,6 +28,5 @@ locale-zhTW.lua
 locale-koKR.lua
 
 DefaultClickSets.lua
-UIDropDownTooltipFunc.lua
-PlexusClickSetsFrame.xml
 SetupPlexus.lua
+core.lua

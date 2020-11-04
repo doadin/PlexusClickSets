@@ -35,43 +35,6 @@ addon.DependOn("Plexus", function()
     local function WithAllPlexusFrames(func)
         for _, frame in pairs(PlexusFrame.registeredFrames) do
                func(frame)
-           end
-    end
-
-    PlexusClickSets = Plexus:NewModule("PlexusClickSets") --luacheck:ignore 111
-
-    function PlexusFrameDropDown_Initialize(self) --luacheck:ignore 111
-        local unit = self:GetParent().unit;
-        if ( not unit ) then
-            return;
-        end
-        local menu;
-        local name;
-        local id = nil;
-        if ( UnitIsUnit(unit, "player") ) then
-            menu = "SELF";
-        elseif ( UnitIsUnit(unit, "vehicle") ) then
-            -- NOTE: vehicle check must come before pet check for accuracy's sake because
-            -- a vehicle may also be considered your pet
-            menu = "VEHICLE";
-        elseif ( UnitIsUnit(unit, "pet") ) then
-            menu = "PET";
-        elseif ( UnitIsPlayer(unit) ) then
-            id = UnitInRaid(unit);
-            if ( id ) then
-                menu = "RAID_PLAYER";
-                name = GetRaidRosterInfo(id);
-            elseif ( UnitInParty(unit) ) then
-                menu = "PARTY";
-            else
-                menu = "PLAYER";
-            end
-        else
-            menu = "TARGET";
-            name = RAID_TARGET_ICON;
-        end
-        if ( menu ) then
-            UnitPopup_ShowMenu(self, menu, unit, name, id);
         end
     end
 
@@ -84,43 +47,17 @@ addon.DependOn("Plexus", function()
         end
         frame:SetAttribute("*type2", "menu");
         frame.dropDown:Hide();
-        PlexusClickSets_SetAttributes(frame, PlexusClickSetsFrame_GetCurrentSet());
+        --PlexusClickSets_SetAttributes(frame, PlexusClickSetsFrame_GetCurrentSet());
     end
 
     hooksecurefunc(PlexusFrame, "InitializeFrame", initializeFrame)
     if IsLoggedIn() and PlexusFrame.registeredFrames then WithAllPlexusFrames(function(f) initializeFrame(nil, f) end) end
 
-    local options = {
-        type = "execute",
-        name = L["Click Set"],
-        desc = L["Sets the clicking actions for every unit button."],
-        order = 0.1,
-        func = function()
-            if InterfaceOptionsFrame:IsVisible() then
-                InterfaceOptionsFrame.lastFrame = nil --luacheck:ignore 112
-                HideUIPanel(InterfaceOptionsFrame, true)
-                PlexusClickSetsFrame.lastFrame = InterfaceOptionsFrame --luacheck:ignore 112
-            else
-                LibStub("AceConfigDialog-3.0"):Close("Plexus")
-                PlexusClickSetsFrame.lastFrame = function() LibStub("AceConfigDialog-3.0"):Open("Plexus") end --luacheck:ignore 112
-            end
-            PlexusClickSetsFrame:Show();
-            GameTooltip:Hide();
-        end
-    }
-
-    PlexusClickSets.options = { type = "group", name = options.name, order = options.order, args = { button = options } } --luacheck:ignore 112
-
-    function PlexusClickSets:OnEnable() --luacheck:ignore 112 212
-        --the profile no longer work with plexus.
-    end
-
-    function PlexusClickSets:Reset() --luacheck:ignore 112 212
-        --the profile no longer work with plexus.
-    end
-
-    table.insert(PlexusClickSetsFrame_Updates, function(set)
-        WithAllPlexusFrames(function (f) PlexusClickSets_SetAttributes(f, set) end)
-    end);
+    --table.insert(
+                    --PlexusClickSetsFrame_Updates,
+                    --function(set)
+                       --WithAllPlexusFrames(function (f) PlexusClickSets_SetAttributes(f, set) 
+                    --end)
+    --end)
 
 end)
