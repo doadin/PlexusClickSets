@@ -46,7 +46,7 @@
                     </OnLeave>
                 </Scripts>
             </Frame>
-            <EditBox name="$parentArg"  autoFocus="false" multiLine="true" letters="255">
+            <EditBox name="$parentArg"  autoFocus="false" multiLine="true" letters="255" inherits="BackdropTemplate">
                 <Anchors>
                     <Anchor point="LEFT">
                         <Offset> <AbsDimension x="50" y="0"/> </Offset>

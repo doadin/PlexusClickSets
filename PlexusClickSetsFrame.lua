@@ -77,6 +77,14 @@ function PlexusClickSetsFrame_TypeUpdate(id)
     local value = UIDropDownMenu_GetSelectedValue(typeDD)
     if (not value) then value = "NONE" end
 
+    argF:SetBackdrop({
+        bgFile = "Interface/Tooltips/UI-Tooltip-Background",
+        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+        edgeSize = 16,
+        insets = { left = 4, right = 4, top = 4, bottom = 4 },
+    })
+    argF:SetBackdropColor(0, 0, 0, .5)
+
     if( value=="spell" or value=="macro" ) then
         argF:Show();
     else
