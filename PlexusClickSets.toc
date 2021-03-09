@@ -8,6 +8,7 @@
 ## Title: PlexusClickSets
 ## Notes: PlexusClickSets.
 ## Author: Doadin
+## Dependencies: Plexus
 ## X-Credits: Warbaby
 ## SavedVariablesPerCharacter: PlexusClickSetsForTalents
 ## X-License: GNU General Public License (GPL) Version 2
