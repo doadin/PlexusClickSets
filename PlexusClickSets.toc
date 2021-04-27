@@ -22,5 +22,6 @@ locale-koKR.lua
 
 DefaultClickSets.lua
 UIDropDownTooltipFunc.lua
-PlexusClickSetsFrame.xml
+#PlexusClickSetsFrame.xml
+PlexusClickSetsFrameOptions.lua
 SetupPlexus.lua
