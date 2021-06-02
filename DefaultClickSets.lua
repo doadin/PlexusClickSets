@@ -470,22 +470,30 @@ if IsTBCWow() then
         }
     }
 
-    local _, classFilename = UnitClass("player")
-    PlexusClickSets_SpellList = {}
-    PlexusClickSets_SpellList[classFilename] = {}
-    local i = 2
-    while true do
-       local spellName, spellSubName = GetSpellBookItemName(i, BOOKTYPE_SPELL)
-       if not spellName then
-          do break end
-       end
-       local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellName)
-       -- use spellName and spellSubName here
-       --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
-       --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
-       table.insert(PlexusClickSets_SpellList[classFilename],spellId, 0)
-       i = i + 1
+end
+
+if IsClassicWow() or IsTBCWow() then
+    local f = CreateFrame("Frame")
+    f:RegisterEvent("SPELLS_CHANGED")
+    function GenSpellList()
+        local _, classFilename = UnitClass("player")
+        PlexusClickSets_SpellList = {}
+        PlexusClickSets_SpellList[classFilename] = {}
+        local i = 2
+        while true do
+           local spellName, spellSubName = GetSpellBookItemName(i, BOOKTYPE_SPELL)
+           if not spellName then
+              do break end
+           end
+           local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellName)
+           -- use spellName and spellSubName here
+           --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
+           --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
+           table.insert(PlexusClickSets_SpellList[classFilename],spellId, 0)
+           i = i + 1
+        end
     end
+    f:SetScript("OnEvent", GenSpellList)
 end
 
 if GetLocale() == "zhCN" then

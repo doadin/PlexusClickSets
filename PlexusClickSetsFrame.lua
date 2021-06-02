@@ -163,22 +163,25 @@ function PlexusClickSetButton_TypeDropDown_Initialize(self)
     if IsTBCWow() then
         spec = 0
     end
-    local list = PlexusClickSets_SpellList[c]
-    if(list) then
-        for spellId, defSpec in pairs(list) do
-            --ReplacingTalentSpell IsKnown = false, Replaced IsKnown = true
-            if PlexusClickSets_MayHaveSpell(defSpec, spec) then
-                local name, _, icon = GetSpellInfo(spellId)
-                if name ~= nil then
-                    info = {}
-                    info.text = name
-                    info.icon = icon
-                    info.owner = self
-                    info.func = PlexusClickSets_Type_OnClick
-                    info.value = "spellId:"..spellId
-                    info.tooltipFunc = function(self, tip, arg1) tip:SetSpellByID(arg1) end
-                    info.tooltipFuncArg1 = spellId
-                    UIDropDownMenu_AddButton(info)
+    local list
+    if PlexusClickSets_SpellList then
+        list = PlexusClickSets_SpellList[c]
+        if(list) then
+            for spellId, defSpec in pairs(list) do
+                --ReplacingTalentSpell IsKnown = false, Replaced IsKnown = true
+                if PlexusClickSets_MayHaveSpell(defSpec, spec) then
+                    local name, _, icon = GetSpellInfo(spellId)
+                    if name ~= nil then
+                        info = {}
+                        info.text = name
+                        info.icon = icon
+                        info.owner = self
+                        info.func = PlexusClickSets_Type_OnClick
+                        info.value = "spellId:"..spellId
+                        info.tooltipFunc = function(self, tip, arg1) tip:SetSpellByID(arg1) end
+                        info.tooltipFuncArg1 = spellId
+                        UIDropDownMenu_AddButton(info)
+                    end
                 end
             end
         end
