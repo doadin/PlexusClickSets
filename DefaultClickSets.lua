@@ -1,7 +1,19 @@
 --/run for _, v in pairs(PlexusClickSets_DefaultSets) do for _, v2 in pairs(v) do for _, v3 in next, v2 do if not GetSpellInfo(v3) then print(v3, GetSpellInfo(v3)) end end end end
 PLEXUS_CLICK_SETS_BUTTONS = 5 --max buttons, another 2 more for wheel up & wheel down
 local assist = { type = "assist" }
+local function IsClassicWow()
+    return WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+end
 
+local function IsTBCWow()
+    return WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+end
+
+local function IsRetailWow()
+    return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+end
+
+if IsRetailWow() then
 PlexusClickSets_DefaultSets = {
     PRIEST = {
         [1] = {
@@ -345,6 +357,136 @@ PlexusClickSets_SpellList = {
         [207810] = 2,--虚空联结1浩劫2复仇
     }
 }
+end
+
+if IsClassicWow() then
+    PlexusClickSets_DefaultSets = {
+        PRIEST = {
+            [0] = {
+                ["1"] = 2050,--Lesser Heal
+            }
+        },
+        DRUID = {
+            [0] = {
+                ["1"] = 5185, --Healing Touch
+            }
+        },
+        SHAMAN = {
+            [0] = {
+                ["1"] = 331,--Healing Wave
+            }
+        },
+        MAGE = {
+            {
+                ["1"] = assist,--assist
+            }
+        },
+        WARRIOR = {
+            {
+                ["1"] = assist,--assist
+            }
+        },
+        WARLOCK = {
+            {
+                ["1"] = assist,--assist
+            }
+        },
+        HUNTER = {
+            {
+                ["1"] = assist,--assist
+            }
+        },
+        ROGUE = {
+            {
+                ["1"] = assist,--assist
+            }
+        }
+    }
+
+    local _, classFilename = UnitClass("player")
+    PlexusClickSets_SpellList = {}
+    PlexusClickSets_SpellList[classFilename] = {}
+    local i = 2
+    while true do
+       local spellName, spellSubName = GetSpellBookItemName(i, BOOKTYPE_SPELL)
+       if not spellName then
+          do break end
+       end
+       local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellName)
+       -- use spellName and spellSubName here
+       --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
+       --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
+       table.insert(PlexusClickSets_SpellList[classFilename],spellId, 0)
+       i = i + 1
+    end
+end
+
+if IsTBCWow() then
+    PlexusClickSets_DefaultSets = {
+        PRIEST = {
+            [0] = {
+                ["1"] = 2050,--Lesser Heal
+            }
+        },
+        DRUID = {
+            [0] = {
+                ["1"] = 5185, --Healing Touch
+            }
+        },
+        PALADIN = {
+            [0] = {
+                ["1"] = 635,--Holy Light
+            }
+        },
+        SHAMAN = {
+            [0] = {
+                ["1"] = 331,--Healing Wave
+            }
+        },
+        MAGE = {
+            {
+                ["1"] = assist,--assist
+            }
+        },
+        WARRIOR = {
+            {
+                ["1"] = assist,--assist
+            }
+        },
+        WARLOCK = {
+            {
+                ["1"] = assist,--assist
+            }
+        },
+        HUNTER = {
+            {
+                ["1"] = assist,--assist
+            }
+        },
+        ROGUE = {
+            {
+                ["1"] = assist,--assist
+            }
+        }
+    }
+
+    local _, classFilename = UnitClass("player")
+    PlexusClickSets_SpellList = {}
+    PlexusClickSets_SpellList[classFilename] = {}
+    local i = 2
+    while true do
+       local spellName, spellSubName = GetSpellBookItemName(i, BOOKTYPE_SPELL)
+       if not spellName then
+          do break end
+       end
+       local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellName)
+       -- use spellName and spellSubName here
+       --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
+       --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
+       table.insert(PlexusClickSets_SpellList[classFilename],spellId, 0)
+       i = i + 1
+    end
+end
 
 if GetLocale() == "zhCN" then
     PlexusClickSets_Titles = {
