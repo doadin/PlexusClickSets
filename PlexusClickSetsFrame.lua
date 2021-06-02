@@ -331,6 +331,16 @@ function PlexusClickSetsFrame_GetCurrentSet()
             set[tostring(i)] = set[tostring(i)] or {}
         end
     end
+    if IsClassicWow() or IsTBCWow() then
+        spec = 0
+        if PlexusClickSetsForTalents[spec]==nil then
+            PlexusClickSetsForTalents[spec] = PlexusClickSets_GetDefault(spec)
+        end
+        set = PlexusClickSetsForTalents[spec]
+        for i=1, PLEXUS_CLICK_SETS_BUTTONS+2 do
+            set[tostring(i)] = set[tostring(i)] or {}
+        end
+    end
     return set
 end
 
