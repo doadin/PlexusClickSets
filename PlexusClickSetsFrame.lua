@@ -259,13 +259,15 @@ function PlexusClickSetsFrame_TabOnClick()
 end
 
 function PlexusClickSetsFrame_DefaultsOnClick(fromDialog)
-    if fromDialog == "YES" then
-        local talent = GetSpecialization() or 1
-        PlexusClickSetsForTalents[talent] = nil
-        PlexusClickSetsFrame_LoadSet( PlexusClickSetsFrame_GetTabSet(PlexusClickSetsFrame.selectedTab) )
-        PlexusClickSetsFrame_ApplyOnClick()
-    else
-        StaticPopup_Show("PlexusClickSets_Reset")
+    if IsRetailWow() then
+        if fromDialog == "YES" then
+            local talent = GetSpecialization() or 1
+            PlexusClickSetsForTalents[talent] = nil
+            PlexusClickSetsFrame_LoadSet( PlexusClickSetsFrame_GetTabSet(PlexusClickSetsFrame.selectedTab) )
+            PlexusClickSetsFrame_ApplyOnClick()
+        else
+            StaticPopup_Show("PlexusClickSets_Reset")
+        end
     end
 end
 
@@ -315,17 +317,20 @@ PlexusClickSetsFrame_Updates = {} --for other module insert
 
 function PlexusClickSetsFrame_GetCurrentSet()
     local spec = 0
+    local set = {}
     if IsRetailWow() then
-        local spec = GetSpecialization() or 0
+        spec = GetSpecialization() or 0
         if PlexusClickSetsFrame:IsVisible() then
             PlexusClickSetsFrameTalentText:SetFormattedText("%s: %s", SPECIALIZATION, select(2, GetSpecializationInfo(spec)) or UNKNOWN)
         end
         if PlexusClickSetsForTalents[spec]==nil then
             PlexusClickSetsForTalents[spec] = PlexusClickSets_GetDefault(spec)
         end
+        set = PlexusClickSetsForTalents[spec]
+        for i=1, PLEXUS_CLICK_SETS_BUTTONS+2 do
+            set[tostring(i)] = set[tostring(i)] or {}
+        end
     end
-    local set = PlexusClickSetsForTalents[spec]
-    for i=1, PLEXUS_CLICK_SETS_BUTTONS+2 do set[tostring(i)] = set[tostring(i)] or {} end
     return set
 end
 
