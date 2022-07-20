@@ -416,6 +416,7 @@ if IsClassicWow() then
        -- use spellName and spellSubName here
        --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
        --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
+       if not spellId then break end
        table.insert(PlexusClickSets_SpellList[classFilename],spellId, 0)
        i = i + 1
     end
@@ -489,6 +490,7 @@ if IsClassicWow() or IsTBCWow() then
            -- use spellName and spellSubName here
            --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
            --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
+           if not spellId then break end
            table.insert(PlexusClickSets_SpellList[classFilename],spellId, 0)
            i = i + 1
         end
