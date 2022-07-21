@@ -565,7 +565,7 @@ function PlexusClickSets_GetBtnDefaultSet(btn, spec)
             end
             if type(v) == "number" then
                 if GetSpellInfo(v) then
-                    local defSpec = PlexusClickSets_SpellList[c][v]
+                    local defSpec = PlexusClickSets_SpellList and PlexusClickSets_SpellList[c][v]
                     if PlexusClickSets_MayHaveSpell(defSpec, spec) then
                         set[modi] = { type = "spellId:"..v };
                     end
