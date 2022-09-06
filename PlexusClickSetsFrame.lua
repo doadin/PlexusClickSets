@@ -1,15 +1,20 @@
 --local L = LibStub("AceLocale-3.0"):GetLocale("PlexusClickSets")
-local function IsClassicWow()
+local function IsClassicWow() --luacheck: ignore 212
 	return WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 end
 
-local function IsTBCWow()
-	return WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+local function IsTBCWow() --luacheck: ignore 212
+	return WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC and LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_BURNING_CRUSADE
 end
 
-local function IsRetailWow()
+local function IsWrathWow() --luacheck: ignore 212
+	return WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC and LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_WRATH_OF_THE_LICH_KING
+end
+
+local function IsRetailWow() --luacheck: ignore 212
 	return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 end
+
 local i
 local queue = false
 
@@ -161,6 +166,9 @@ function PlexusClickSetButton_TypeDropDown_Initialize(self)
         spec = 0
     end
     if IsTBCWow() then
+        spec = 0
+    end
+    if IsWrathWow() then
         spec = 0
     end
     local list
@@ -334,7 +342,7 @@ function PlexusClickSetsFrame_GetCurrentSet()
             set[tostring(i)] = set[tostring(i)] or {}
         end
     end
-    if IsClassicWow() or IsTBCWow() then
+    if IsClassicWow() or IsTBCWow() or IsWrathWow() then
         spec = 0
         if PlexusClickSetsForTalents[spec]==nil then
             PlexusClickSetsForTalents[spec] = PlexusClickSets_GetDefault(spec)
