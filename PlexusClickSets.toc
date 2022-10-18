@@ -23,9 +23,12 @@ locale-koKR.lua
 
 DefaultClickSets.lua
 UIDropDownTooltipFunc.lua
-#@non-version-classic@
+#@retail@
+PlexusClickSetsFrameRetail.xml
+#@end-retail@
+#@version-wrath@
 PlexusClickSetsFrame.xml
-#@end-non-version-classic@
+#@end-version-wrath@
 #@version-classic@
 PlexusClickSetsFrameClassic.xml
 #@end-version-classic@

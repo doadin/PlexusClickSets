@@ -96,14 +96,14 @@ addon.DependOn("Plexus", function()
         desc = PLEXUSCLICKSETS_MENUTIP,
         order = 0.1,
         func = function()
-            if InterfaceOptionsFrame:IsVisible() then
-                InterfaceOptionsFrame.lastFrame = nil
-                HideUIPanel(InterfaceOptionsFrame, true)
-                PlexusClickSetsFrame.lastFrame = InterfaceOptionsFrame
-            else
-                LibStub("AceConfigDialog-3.0"):Close("Plexus")
-                PlexusClickSetsFrame.lastFrame = function() LibStub("AceConfigDialog-3.0"):Open("Plexus") end
-            end
+            --if InterfaceOptionsFrame:IsVisible() then
+            --    InterfaceOptionsFrame.lastFrame = nil
+            --    HideUIPanel(InterfaceOptionsFrame, true)
+            --    PlexusClickSetsFrame.lastFrame = InterfaceOptionsFrame
+            --else
+            --    LibStub("AceConfigDialog-3.0"):Close("Plexus")
+            --    PlexusClickSetsFrame.lastFrame = function() LibStub("AceConfigDialog-3.0"):Open("Plexus") end
+            --end
             PlexusClickSetsFrame:Show();
             GameTooltip:Hide();
         end
