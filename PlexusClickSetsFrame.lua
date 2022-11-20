@@ -130,11 +130,8 @@ function PlexusClickSetsFrame_Resize()
         end
     end
     local height = 340 + k
-    if(height > 450) then
-        PlexusClickSetsFrame:SetHeight(height)
-    else
-        PlexusClickSetsFrame:SetHeight(450)
-    end
+    PlexusClickSetsFrame:SetHeight(height)
+    PlexusClickSetsFrame:SetWidth(680)
 end
 
 function PlexusClickSetsFrame_TypeUpdateAll()
