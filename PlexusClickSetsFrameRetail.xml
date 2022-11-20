@@ -64,13 +64,13 @@
                     <AbsInset left="6" right="6" top="6" bottom="6"/>
                 </TextInsets>
 
-                <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" bgFile = "" tile="true">
+                <!-- <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" bgFile = "" tile="true">
                     <EdgeSize><AbsValue val="16"/></EdgeSize>
                     <TileSize><AbsValue val="16"/></TileSize>
                     <BackgroundInsets>
                         <AbsInset left="3" right="3" top="3" bottom="3"/>
                     </BackgroundInsets>
-                </Backdrop>
+                </Backdrop> -->
 
                 <Scripts>
                     <OnLoad>
@@ -154,14 +154,11 @@
             </Layer>
         </Layers>
         <Frames>
-            <Button name="$parentClose" inherits="UIPanelButtonTemplate" text="CLOSE">
+            <Button name="$parentClose" inherits="UIPanelButtonGrayTemplate" text="CLOSE">
                 <Size>
                     <AbsDimension x="76" y="22"/>
                 </Size>
-                <Anchors>
-                    <!--
-                         <Anchor point="BOTTOMRIGHT" relativeTo="$parentApply" relativePoint="BOTTOMLEFT"/>
-                         -->
+                <Anchors>                        
                     <Anchor point="BOTTOMRIGHT">
                         <Offset>
                             <AbsDimension x="-16" y="16"/>
@@ -174,7 +171,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentCancel" inherits="UIPanelButtonTemplate" text="CANCEL">
+            <Button name="$parentCancel" inherits="UIPanelButtonGrayTemplate" text="CANCEL">
                 <Size>
                     <AbsDimension x="76" y="22"/>
                 </Size>
@@ -187,7 +184,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentApply" inherits="UIPanelButtonTemplate" text="APPLY">
+            <Button name="$parentApply" inherits="UIPanelButtonGrayTemplate" text="APPLY">
                 <Size>
                     <AbsDimension x="76" y="22"/>
                 </Size>
@@ -231,7 +228,7 @@
                         </Offset>
                     </Anchor>
                 </Anchors>
-                <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+                <!-- <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
                     <EdgeSize>
                         <AbsValue val="16"/>
                     </EdgeSize>
@@ -241,7 +238,7 @@
                     <BackgroundInsets>
                         <AbsInset left="5" right="5" top="5" bottom="5"/>
                     </BackgroundInsets>
-                </Backdrop>
+                </Backdrop> -->
                 <Scripts>
                     <OnLoad>
                         self:SetBackdropBorderColor(.6, .6, .6, 1);
@@ -249,7 +246,7 @@
                 </Scripts>
             </Frame>
 
-            <Button name="$parentTab1" inherits="OptionsFrameTabButtonTemplate" text="KEY_BUTTON1" id="1" hidden="false">
+            <Button name="$parentTab1" inherits="PanelTopTabButtonTemplate" text="KEY_BUTTON1" id="1" hidden="false">
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativeTo="$parentPanelContainer" relativePoint="TOPLEFT">
                         <Offset>
@@ -267,7 +264,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentTab2" inherits="OptionsFrameTabButtonTemplate" text="KEY_BUTTON2" id="2" hidden="false">
+            <Button name="$parentTab2" inherits="PanelTopTabButtonTemplate" text="KEY_BUTTON2" id="2" hidden="false">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentTab1" relativePoint="TOPRIGHT">
                         <Offset>
@@ -285,7 +282,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentTab3" inherits="OptionsFrameTabButtonTemplate" text="KEY_BUTTON3" id="3" hidden="false">
+            <Button name="$parentTab3" inherits="PanelTopTabButtonTemplate" text="KEY_BUTTON3" id="3" hidden="false">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentTab2" relativePoint="TOPRIGHT">
                         <Offset>
@@ -303,7 +300,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentTab4" inherits="OptionsFrameTabButtonTemplate" text="4" id="4" hidden="false">
+            <Button name="$parentTab4" inherits="PanelTopTabButtonTemplate" text="4" id="4" hidden="false">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentTab3" relativePoint="TOPRIGHT">
                         <Offset>
@@ -321,7 +318,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentTab5" inherits="OptionsFrameTabButtonTemplate" text="5" id="5" hidden="false">
+            <Button name="$parentTab5" inherits="PanelTopTabButtonTemplate" text="5" id="5" hidden="false">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentTab4" relativePoint="TOPRIGHT">
                         <Offset>
@@ -339,7 +336,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentTab6" inherits="OptionsFrameTabButtonTemplate" text="PLEXUSCLICKSETS_SET_WHEEL_UP" id="6" hidden="false">
+            <Button name="$parentTab6" inherits="PanelTopTabButtonTemplate" text="PLEXUSCLICKSETS_SET_WHEEL_UP" id="6" hidden="false">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentTab5" relativePoint="TOPRIGHT">
                         <Offset>
@@ -357,7 +354,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentTab7" inherits="OptionsFrameTabButtonTemplate" text="PLEXUSCLICKSETS_SET_WHEEL_DOWN" id="7" hidden="false">
+            <Button name="$parentTab7" inherits="PanelTopTabButtonTemplate" text="PLEXUSCLICKSETS_SET_WHEEL_DOWN" id="7" hidden="false">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentTab6" relativePoint="TOPRIGHT">
                         <Offset>
