@@ -14,6 +14,8 @@
 ## X-Website: https://wow.curseforge.com/projects/plexusclicksets/
 ## X-Curse-Project-ID: 416218
 
+## IconTexture: Interface\AddOns\Plexus\Media\icon
+
 Libs\AceLocale-3.0\AceLocale-3.0.lua
 
 locale-enUS.lua
