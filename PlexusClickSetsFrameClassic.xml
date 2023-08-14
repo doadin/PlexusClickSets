@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
     <Script file="PlexusClickSetsFrame.lua"/>
-    <Frame name="PlexusClickSetButtonOptionTemplate" parent="PlexusClickSetsFramePanelContainer" virtual="true" >
+    <Frame name="PlexusClickSetButtonOptionTemplate" parent="PlexusClickSetsFramePanelContainer" virtual="true" inherits="BackdropTemplate" >
         <Size> <AbsDimension x="450" y="25"/> </Size>
         <Layers>
             <Layer level="ARTWORK">
@@ -17,7 +17,7 @@
         </Layers>
 
         <Frames>
-            <Frame name="$parentType" inherits="UIDropDownMenuTemplate">
+            <Frame name="$parentType" inherits="UIDropDownMenuTemplate,BackdropTemplate">
                 <Anchors>
                     <Anchor point="TOPRIGHT">
                         <Offset> <AbsDimension x="0" y="-5"/> </Offset>
@@ -46,7 +46,7 @@
                     </OnLeave>
                 </Scripts>
             </Frame>
-            <EditBox name="$parentArg"  autoFocus="false" multiLine="true" letters="255" >
+            <EditBox name="$parentArg"  autoFocus="false" multiLine="true" letters="255" inherits="BackdropTemplate">
                 <Anchors>
                     <Anchor point="LEFT">
                         <Offset> <AbsDimension x="50" y="0"/> </Offset>
@@ -64,13 +64,13 @@
                     <AbsInset left="6" right="6" top="6" bottom="6"/>
                 </TextInsets>
 
-                <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" bgFile = "" tile="true">
+                <!-- <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" bgFile = "" tile="true">
                     <EdgeSize><AbsValue val="16"/></EdgeSize>
                     <TileSize><AbsValue val="16"/></TileSize>
                     <BackgroundInsets>
                         <AbsInset left="3" right="3" top="3" bottom="3"/>
                     </BackgroundInsets>
-                </Backdrop>
+                </Backdrop> -->
 
                 <Scripts>
                     <OnLoad>
@@ -112,7 +112,7 @@
         </Frames>
     </Frame>
 
-    <Frame name="PlexusClickSetsFrame" parent="UIParent" hidden="true" enableMouse="true" frameStrata="HIGH" >
+    <Frame name="PlexusClickSetsFrame" parent="UIParent" hidden="true" enableMouse="true" frameStrata="HIGH" inherits="BackdropTemplate" >
         <Size>
             <AbsDimension x="500" y="520"/>
         </Size>
@@ -154,14 +154,11 @@
             </Layer>
         </Layers>
         <Frames>
-            <Button name="$parentClose" inherits="UIPanelButtonTemplate" text="CLOSE">
+            <Button name="$parentClose" inherits="UIPanelButtonGrayTemplate" text="CLOSE">
                 <Size>
                     <AbsDimension x="76" y="22"/>
                 </Size>
-                <Anchors>
-                    <!--
-                         <Anchor point="BOTTOMRIGHT" relativeTo="$parentApply" relativePoint="BOTTOMLEFT"/>
-                         -->
+                <Anchors>                        
                     <Anchor point="BOTTOMRIGHT">
                         <Offset>
                             <AbsDimension x="-16" y="16"/>
@@ -174,7 +171,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentCancel" inherits="UIPanelButtonTemplate" text="CANCEL">
+            <Button name="$parentCancel" inherits="UIPanelButtonGrayTemplate" text="CANCEL">
                 <Size>
                     <AbsDimension x="76" y="22"/>
                 </Size>
@@ -187,7 +184,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="$parentApply" inherits="UIPanelButtonTemplate" text="APPLY">
+            <Button name="$parentApply" inherits="UIPanelButtonGrayTemplate" text="APPLY">
                 <Size>
                     <AbsDimension x="76" y="22"/>
                 </Size>
@@ -218,7 +215,7 @@
                 </Scripts>
             </Button>
 
-            <Frame name="$parentPanelContainer" >
+            <Frame name="$parentPanelContainer" inherits="BackdropTemplate">
                 <Anchors>
                     <Anchor point="TOPLEFT">
                         <Offset>
@@ -231,7 +228,7 @@
                         </Offset>
                     </Anchor>
                 </Anchors>
-                <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+                <!-- <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
                     <EdgeSize>
                         <AbsValue val="16"/>
                     </EdgeSize>
@@ -241,7 +238,7 @@
                     <BackgroundInsets>
                         <AbsInset left="5" right="5" top="5" bottom="5"/>
                     </BackgroundInsets>
-                </Backdrop>
+                </Backdrop> -->
                 <Scripts>
                     <OnLoad>
                         self:SetBackdropBorderColor(.6, .6, .6, 1);
@@ -376,7 +373,7 @@
                 </Scripts>
             </Button>
 
-            <Frame name="PlexusClickSetButton1" inherits="PlexusClickSetButtonOptionTemplate" ID="1">
+            <Frame name="PlexusClickSetButton1" inherits="PlexusClickSetButtonOptionTemplate,BackdropTemplate" ID="1">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="PlexusClickSetsFramePanelContainer">
                         <Offset> <AbsDimension x="10" y="0"/>	</Offset>
