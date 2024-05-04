@@ -3,6 +3,7 @@
 ## Interface-Classic: 11501
 ## Interface-BCC: 20504
 ## Interface-Wrath: 30403
+## Interface-Cata: 40400
 ## Version: @project-version@
 ## Title: PlexusClickSets
 ## Notes: PlexusClickSets.
@@ -31,6 +32,9 @@ PlexusClickSetsFrameRetail.xml
 #@version-wrath@
 PlexusClickSetsFrame.xml
 #@end-version-wrath@
+#@version-cata@
+PlexusClickSetsFrame.xml
+#@end-version-cata@
 #@version-classic@
 PlexusClickSetsFrameClassic.xml
 #@end-version-classic@
