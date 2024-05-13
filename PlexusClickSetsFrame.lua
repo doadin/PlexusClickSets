@@ -11,6 +11,10 @@ local function IsWrathWow() --luacheck: ignore 212
 	return WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC and LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_WRATH_OF_THE_LICH_KING
 end
 
+local function IsCataWow() --luacheck: ignore 212
+    return WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC and LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_CATACLYSM
+end
+
 local function IsRetailWow() --luacheck: ignore 212
 	return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 end
@@ -166,6 +170,9 @@ function PlexusClickSetButton_TypeDropDown_Initialize(self)
         spec = 0
     end
     if IsWrathWow() then
+        spec = 0
+    end
+    if IsCataWow() then
         spec = 0
     end
     local list
@@ -339,7 +346,7 @@ function PlexusClickSetsFrame_GetCurrentSet()
             set[tostring(i)] = set[tostring(i)] or {}
         end
     end
-    if IsClassicWow() or IsTBCWow() or IsWrathWow() then
+    if IsClassicWow() or IsTBCWow() or IsWrathWow() or IsCataWow() then
         spec = 0
         if PlexusClickSetsForTalents[spec]==nil then
             PlexusClickSetsForTalents[spec] = PlexusClickSets_GetDefault(spec)

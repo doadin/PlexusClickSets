@@ -13,6 +13,10 @@ local function IsWrathWow() --luacheck: ignore 212
 	return WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC and LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_WRATH_OF_THE_LICH_KING
 end
 
+local function IsCataWow() --luacheck: ignore 212
+    return WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC and LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_CATACLYSM
+end
+
 local function IsRetailWow() --luacheck: ignore 212
 	return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 end
@@ -508,7 +512,7 @@ if IsTBCWow() then
     end
 end
 
-if IsWrathWow() then
+if IsWrathWow() or IsCataWow() then
     PlexusClickSets_DefaultSets = {
         PRIEST = {
             [0] = {
@@ -581,7 +585,7 @@ if IsWrathWow() then
     end
 end
 
-if IsClassicWow() or IsTBCWow() or IsWrathWow() then
+if IsClassicWow() or IsTBCWow() or IsWrathWow() or IsCataWow() then
     local f = CreateFrame("Frame")
     f:RegisterEvent("SPELLS_CHANGED")
     function GenSpellList()
