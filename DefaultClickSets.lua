@@ -21,6 +21,9 @@ local function IsRetailWow() --luacheck: ignore 212
 	return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 end
 
+local GetSpellInfo = C_Spell and C_Spell.GetSpellInfo or GetSpellInfo
+local GetSpellBookItemName = C_SpellBook and C_SpellBook.GetSpellBookItemName or GetSpellBookItemName
+
 if IsRetailWow() then
 PlexusClickSets_DefaultSets = {
     PRIEST = {
@@ -430,17 +433,23 @@ if IsClassicWow() then
     PlexusClickSets_SpellList[classFilename] = {}
     local i = 2
     while true do
-       local spellName, spellSubName = GetSpellBookItemName(i, BOOKTYPE_SPELL)
-       if not spellName then
-          do break end
-       end
-       local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellName)
-       -- use spellName and spellSubName here
-       --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
-       --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
-       if not spellId then break end
-       table.insert(PlexusClickSets_SpellList[classFilename],spellId, 0)
-       i = i + 1
+        local spellName, spellSubName = GetSpellBookItemName(i, BOOKTYPE_SPELL)
+        if not spellName then
+           do break end
+        end
+        local spellId
+        if C_Spell then
+            local spellInfo = GetSpellInfo(spellName)
+            spellId = spellInfo.spellID
+        else
+            spellId = select(7,GetSpellInfo(spellName))
+        end
+        -- use spellName and spellSubName here
+        --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
+        --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
+        if not spellId then break end
+        table.insert(PlexusClickSets_SpellList[classFilename],spellId, 0)
+        i = i + 1
     end
 end
 
@@ -502,7 +511,13 @@ if IsTBCWow() then
        if not spellName then
           do break end
        end
-       local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellName)
+       local spellId
+       if C_Spell then
+           local spellInfo = GetSpellInfo(spellName)
+           spellId = spellInfo.spellID
+       else
+           spellId = select(7,GetSpellInfo(spellName))
+       end
        -- use spellName and spellSubName here
        --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
        --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
@@ -575,7 +590,13 @@ if IsWrathWow() or IsCataWow() then
        if not spellName then
           do break end
        end
-       local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellName)
+       local spellId
+       if C_Spell then
+           local spellInfo = GetSpellInfo(spellName)
+           spellId = spellInfo.spellID
+       else
+           spellId = select(7,GetSpellInfo(spellName))
+       end
        -- use spellName and spellSubName here
        --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
        --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
@@ -598,7 +619,13 @@ if IsClassicWow() or IsTBCWow() or IsWrathWow() or IsCataWow() then
            if not spellName then
               do break end
            end
-           local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellName)
+           local spellId
+           if C_Spell then
+               local spellInfo = GetSpellInfo(spellName)
+               spellId = spellInfo.spellID
+           else
+               spellId = select(7,GetSpellInfo(spellName))
+           end
            -- use spellName and spellSubName here
            --DEFAULT_CHAT_FRAME:AddMessage( spellName .. '(' .. spellSubName .. ')' )
            --DEFAULT_CHAT_FRAME:AddMessage( "New: " .. name .. '(' .. spellSubName .. ')' .. spellId )
@@ -745,7 +772,14 @@ function PlexusClickSets_SetAttribute(frame, button, modi, type, arg)
         return
     elseif strsub(type, 1, 8) == "spellId:" then
         frame:SetAttribute(modi.."type"..button, "spell")
-        frame:SetAttribute(modi.."spell"..button, select(1, GetSpellInfo(strsub(type, 9))))
+        local spellName
+        if C_Spell then
+            local spellInfo = GetSpellInfo((strsub(type, 9)))
+            spellName = spellInfo.name
+        else
+            spellName = select(1,GetSpellInfo((strsub(type, 9))))
+        end
+        frame:SetAttribute(modi.."spell"..button, select(1, spellName))
         return
     end
 

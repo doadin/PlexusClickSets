@@ -94,7 +94,9 @@
                         if p then
                         self:ClearFocus();
                         local spell = string.sub(self:GetText(), 1, p-1);
-                        spell = tonumber(spell) and GetSpellInfo(tonumber(spell)) or spell;
+                        local spellInfo = tonumber(spell) and C_Spell.GetSpellInfo(tonumber(spell)) or spell
+                        local name = spellInfo and spellInfo.name or spell
+                        spell = name;
                         self:SetText(spell)
                         end
                         end

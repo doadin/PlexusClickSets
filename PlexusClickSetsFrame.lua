@@ -19,6 +19,8 @@ local function IsRetailWow() --luacheck: ignore 212
 	return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 end
 
+local GetSpellInfo = C_Spell and C_Spell.GetSpellInfo or GetSpellInfo
+
 local i
 local queue = false
 
@@ -182,7 +184,15 @@ function PlexusClickSetButton_TypeDropDown_Initialize(self)
             for spellId, defSpec in pairs(list) do
                 --ReplacingTalentSpell IsKnown = false, Replaced IsKnown = true
                 if PlexusClickSets_MayHaveSpell(defSpec, spec) then
-                    local name, _, icon = GetSpellInfo(spellId)
+                    local name, icon
+                    if C_Spell then
+                        local spellInfo = GetSpellInfo(spellId)
+                        name = spellInfo and spellInfo.name
+                        icon = spellInfo and spellInfo.iconID
+                    else
+                        name = select(1,GetSpellInfo(spellId))
+                        icon = select(3,GetSpellInfo(spellId))
+                    end
                     if name ~= nil then
                         info = {}
                         info.text = name

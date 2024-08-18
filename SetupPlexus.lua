@@ -1,5 +1,7 @@
 local _, addon = ...
 --addon.DependOn = CoreDependCall
+local IsAddOnLoaded = C_AddOns and C_AddOns.IsAddOnLoaded or IsAddOnLoaded
+local GetAddOnInfo = C_AddOns and C_AddOns.GetAddOnInfo or GetAddOnInfo
 
 if not addon.DependOn then
     local eventFrame = CreateFrame("Frame");
