@@ -185,7 +185,7 @@ function PlexusClickSetButton_TypeDropDown_Initialize(self)
                 --ReplacingTalentSpell IsKnown = false, Replaced IsKnown = true
                 if PlexusClickSets_MayHaveSpell(defSpec, spec) then
                     local name, icon
-                    if C_Spell then
+                    if C_Spell and C_Spell.GetSpellInfo then
                         local spellInfo = GetSpellInfo(spellId)
                         name = spellInfo and spellInfo.name
                         icon = spellInfo and spellInfo.iconID

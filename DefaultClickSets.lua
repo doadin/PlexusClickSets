@@ -438,7 +438,7 @@ if IsClassicWow() then
            do break end
         end
         local spellId
-        if C_Spell then
+        if C_Spell and C_Spell.GetSpellInfo then
             local spellInfo = GetSpellInfo(spellName)
             spellId = spellInfo.spellID
         else
@@ -512,7 +512,7 @@ if IsTBCWow() then
           do break end
        end
        local spellId
-       if C_Spell then
+       if C_Spell and C_Spell.GetSpellInfo then
            local spellInfo = GetSpellInfo(spellName)
            spellId = spellInfo.spellID
        else
@@ -591,7 +591,7 @@ if IsWrathWow() or IsCataWow() then
           do break end
        end
        local spellId
-       if C_Spell then
+       if C_Spell and C_Spell.GetSpellInfo then
            local spellInfo = GetSpellInfo(spellName)
            spellId = spellInfo.spellID
        else
@@ -620,7 +620,7 @@ if IsClassicWow() or IsTBCWow() or IsWrathWow() or IsCataWow() then
               do break end
            end
            local spellId
-           if C_Spell then
+           if C_Spell and C_Spell.GetSpellInfo then
                local spellInfo = GetSpellInfo(spellName)
                spellId = spellInfo.spellID
            else
@@ -773,7 +773,7 @@ function PlexusClickSets_SetAttribute(frame, button, modi, type, arg)
     elseif strsub(type, 1, 8) == "spellId:" then
         frame:SetAttribute(modi.."type"..button, "spell")
         local spellName
-        if C_Spell then
+        if C_Spell and C_Spell.GetSpellInfo then
             local spellInfo = GetSpellInfo((strsub(type, 9)))
             spellName = spellInfo.name
         else
