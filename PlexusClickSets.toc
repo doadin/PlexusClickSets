@@ -36,6 +36,9 @@ PlexusClickSetsFrame.xml
 #@version-cata@
 PlexusClickSetsFrame.xml
 #@end-version-cata@
+#@version-bcc@
+PlexusClickSetsFrameClassic.xml
+#@end-version-bcc@
 #@version-classic@
 PlexusClickSetsFrameClassic.xml
 #@end-version-classic@
